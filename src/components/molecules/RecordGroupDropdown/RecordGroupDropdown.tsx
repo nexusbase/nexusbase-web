@@ -42,7 +42,7 @@ const RecordGroupDropdown: FC = () => {
       padding: '2.5px 5px'
     }}>
       <Button
-        style={selectedOption ? style : {}}
+        style={showGroupBy || selectedOption ? style : {}}
         onClick={() => setShowGroupBy(!showGroupBy)}
       >Group by: {selectedOption ? selectedOption.label : 'None'}</Button>
       {showGroupBy &&
