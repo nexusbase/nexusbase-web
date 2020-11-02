@@ -56,7 +56,7 @@ const RecordForm: FC<CIRecordForm> = ({ recordId }) => {
     }
   }, [history, recordSynced, recordSubmitted]);
 
-  const handleCancelButtonClick = () => {
+  const handleCloseButtonClick = () => {
     dispatch(clearRecord());
     history.push({ search: '' });
   }
@@ -90,7 +90,7 @@ const RecordForm: FC<CIRecordForm> = ({ recordId }) => {
           <button
             className="btn"
             style={{ marginRight: "10px" }}
-            onClick={handleCancelButtonClick}
+            onClick={handleCloseButtonClick}
           >Cancel</button>
         </div>
         <div>Loading RecordForm...</div>
@@ -109,8 +109,9 @@ const RecordForm: FC<CIRecordForm> = ({ recordId }) => {
         <Button
           className="btn"
           style={{ marginRight: "10px" }}
-          onClick={handleCancelButtonClick}
-        >Cancel</Button>
+          disabled={false}
+          onClick={handleCloseButtonClick}
+        >close</Button>
         <Button
           className="btn"
           style={{ marginRight: "10px" }}
