@@ -13,13 +13,14 @@ interface CIRelationField extends IFieldComponent {
 
 const RelationField: FC<CIRelationField> = ({
   field: recordField,
-  data,
+  record,
   edit,
   style,
   onFocus,
   onBlur,
   update
 }) => {
+  const data = record.fields[recordField.id];
   const { relatedCollections } = useSelector(({
     collections: { relatedCollections },
   }: IRootStore) => ({ relatedCollections }));

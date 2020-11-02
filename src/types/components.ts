@@ -1,8 +1,8 @@
-import { ICollectionField } from "./database";
+import { ICollectionField, IRecordModel } from "./database";
 
 export interface IFieldComponent {
   field: ICollectionField;
-  data: any;
+  record: IRecordModel;
   edit: boolean;
   style: any;
   onFocus: any;

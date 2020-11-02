@@ -9,23 +9,24 @@ interface CIDropdownField extends IFieldComponent {
 
 const DropdownField: FC<CIDropdownField> = ({
   field,
-  data,
+  record,
   edit,
   style,
   onFocus,
   onBlur,
   update
 }) => {
+  const data = record.fields[field.id];
   const initialOption = field.options.choices.find((option: IDropDownFieldChoice) => option.value === data);
+  
+  if (!edit) {
+    return <div>{initialOption ? initialOption.label : ''}</div>;
+  }
   
   const onChange = (selectedOption: any) => {
     update(selectedOption.value);
   };
-
-  if (!edit) {
-    return <div>{initialOption ? initialOption.label : ''}</div>;
-  }
-
+  
   return (
     <div style={style}>
       <Select

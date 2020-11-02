@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
-import { ICreatedAtField, IRecordModel } from '../../../types/database';
+import { ICreatedAtField } from '../../../types/database';
 import { IFieldComponent } from '../../../types/components';
 
 interface CICreatedAtField extends IFieldComponent {
   field: ICreatedAtField;
-  record: IRecordModel;
 }
 
 const CreatedAtField: FC<CICreatedAtField> = ({

@@ -8,21 +8,23 @@ interface CILineField extends IFieldComponent {
 
 const LineField: FC<CILineField> = ({
   field,
-  data,
+  record,
   edit,
   style,
   onFocus,
   onBlur,
   update
 }) => {
-  const onChange = (e: any) => {
-    update(e.target.value);
-  }
-
+  const data = record.fields[field.id];
+  
   if (!edit) {
     return <div>{data}</div>;
   }
-
+  
+  const onChange = (e: any) => {
+    update(e.target.value);
+  }
+  
   return (
     <input
       type="text"

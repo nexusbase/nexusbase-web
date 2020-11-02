@@ -16,41 +16,27 @@ import TextBoxField from '../molecules/TextBoxField/TextBoxField';
 */
 
 const FieldFactory = (props: any) => {
-  const needsRecord = ['createdAt', 'updatedAt'];
-  let fieldProps: any;
-
-  if (needsRecord.includes(props.field.type)) {
-    fieldProps = props
-  } else {
-    let { record, ...restOfProps } = props;
-    
-    fieldProps = {
-      ...restOfProps,
-      data: props.record.fields[props.field.id]
-    };
-  }
-
   switch (props.field.type) {
     case 'line':
-      return <LineField { ...fieldProps } />;
+      return <LineField { ...props } />;
     case 'dropdown':
-      return <DropdownField { ...fieldProps } />;
+      return <DropdownField { ...props } />;
     case 'relation':
-      return <RelationField { ...fieldProps } />;
+      return <RelationField { ...props } />;
     case 'number':
-      return <NumberField { ...fieldProps } />;
+      return <NumberField { ...props } />;
     case 'email':
-      return <EmailField { ...fieldProps } />;
+      return <EmailField { ...props } />;
     case 'url':
-      return <UrlField { ...fieldProps } />;
+      return <UrlField { ...props } />;
     case 'multiSelect':
-      return <MultiSelectField { ...fieldProps } />;
+      return <MultiSelectField { ...props } />;
     case 'createdAt':
-      return <CreatedAt { ...fieldProps } />;
+      return <CreatedAt { ...props } />;
     case 'updatedAt':
-      return <UpdatedAt { ...fieldProps } />;
+      return <UpdatedAt { ...props } />;
     case 'checkbox':
-      return <Checkbox { ...fieldProps } />;
+      return <Checkbox { ...props } />;
     /*
     case 'date':
       return <DateField { ...props } />;
