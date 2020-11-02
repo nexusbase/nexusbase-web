@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
-import { IUpdatedAtField, IRecordModel } from '../../../types/database';
+import { IUpdatedAtField } from '../../../types/database';
 import { IFieldComponent } from '../../../types/components';
 
 interface CIUpdatedAtField extends IFieldComponent {
   field: IUpdatedAtField;
-  record: IRecordModel;
 }
 
 const UpdatedAtField: FC<CIUpdatedAtField> = ({

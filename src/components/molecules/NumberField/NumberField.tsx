@@ -8,21 +8,23 @@ interface CINumberField extends IFieldComponent {
 
 const NumberField: FC<CINumberField> = ({
   field,
-  data,
+  record,
   edit,
   style,
   onFocus,
   onBlur,
   update
 }) => {
-  const onChange = (e: any) => {
-    update(e.target.value);
-  }
-
+  const data = record.fields[field.id];
+  
   if (!edit) {
     return <div>{data}</div>;
   }
-
+  
+  const onChange = (e: any) => {
+    update(e.target.value);
+  }
+  
   return (
     <input
       type="number"

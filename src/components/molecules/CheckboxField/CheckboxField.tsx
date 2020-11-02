@@ -9,13 +9,15 @@ interface CICheckboxField extends IFieldComponent {
 
 const CheckboxField: FC<CICheckboxField> = ({
   field,
-  data,
+  record,
   edit,
   style,
   onFocus,
   onBlur,
   update
 }) => {
+  const data = record.fields[field.id];
+
   if (!edit) {
     return (
       <>

@@ -10,14 +10,14 @@ interface CIMultiSelectField extends IFieldComponent {
 
 const MultiSelectField: FC<CIMultiSelectField> = ({
   field,
-  data,
+  record,
   edit,
   style,
   onFocus,
   onBlur,
   update
 }) => {
-
+  const data = record.fields[field.id];
   const selected = data || [];
   const initialOptions = field.options.choices.filter((option: IDropDownFieldChoice) => selected.includes(option.value));
   
