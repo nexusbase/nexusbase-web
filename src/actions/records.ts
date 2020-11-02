@@ -156,7 +156,7 @@ export const setRecords = (submitedQuery?: IRecordsQuery) => {
   }
 }
 
-export const setRecord = (id: string) => {
+export const getRecord = (id: string) => {
   return (dispatch: Dispatch, getState: () => IRootStore) => {
     const getRecordStart: GetRecordStart = {
       type: types.GET_RECORD_START
@@ -165,7 +165,7 @@ export const setRecord = (id: string) => {
     dispatch(getRecordStart);
 
     const records = getState().records.records
-    const record = records.find(record => record.id == id);
+    const record = records.find(record => record.id === id);
 
     if (record) {
       const getRecordSuccess: GetRecordSuccess = {
