@@ -11,9 +11,7 @@ import CreatedAt from '../molecules/CreatedAt'
 import UpdatedAt from '../molecules/UpdatedAt'
 import Checkbox from '../molecules/CheckboxField'
 import LongText from '../molecules/LongText';
-/*
-import DateField from '../molecules/DateField/DateField';
-*/
+import DateField from '../molecules/DateField';
 
 const FieldFactory = (props: any) => {
   switch (props.field.type) {
@@ -39,10 +37,8 @@ const FieldFactory = (props: any) => {
       return <Checkbox { ...props } />;
     case 'longtext':
       return <LongText { ...props } />;
-    /*
     case 'date':
       return <DateField { ...props } />;
-    */
     default:
       return (
         <Caution

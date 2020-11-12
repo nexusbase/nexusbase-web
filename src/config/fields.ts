@@ -26,6 +26,11 @@ export default [
         source: 'string'
     },
     {
+        name: 'date',
+        label: 'Date',
+        source: 'string'
+    },
+    {
         name: 'dropdown',
         label: 'Dropdown',
         source: 'array'
