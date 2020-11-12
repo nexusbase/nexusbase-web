@@ -5,14 +5,6 @@ export const types = [
         label: 'Line'
     },
     {
-        name: 'dropdown',
-        label: 'Dropdown'
-    },
-    {
-        name: 'relation',
-        label: 'Relation'
-    },
-    {
         name: 'number',
         label: 'Number'
     },
@@ -25,8 +17,24 @@ export const types = [
         label: 'Url'
     },
     {
+        name: 'longtext',
+        label: 'Long text'
+    },
+    {
+        name: 'dropdown',
+        label: 'Dropdown'
+    },
+    {
         name: 'multiSelect',
         label: 'Multi select'
+    },
+    {
+        name: 'checkbox',
+        label: 'Checkbox'
+    },
+    {
+        name: 'relation',
+        label: 'Relation'
     },
     {
         name: 'createdAt',
@@ -36,8 +44,4 @@ export const types = [
         name: 'updatedAt',
         label: 'Last modified time'
     },
-    {
-        name: 'checkbox',
-        label: 'Checkbox'
-    }
 ];

@@ -26,14 +26,12 @@ const LongText: FC<CILineField> = ({
   }
   
   return (
-    <input
-      type="text"
-      value={data || ''}
+    <textarea
       style={style}
       onChange={onChange}
       onFocus={onFocus}
       onBlur={onBlur}
-    />
+    >{data || ''}</textarea>
   )
 }
 
