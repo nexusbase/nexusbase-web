@@ -41,6 +41,14 @@ export interface IEmailField extends ICollectionField {
   options: null;
 }
 
+export interface ILongTextField extends ICollectionField {
+  options: null;
+}
+
+export interface IDateField extends ICollectionField {
+  options: null;
+}
+
 export interface IDropDownField extends ICollectionField {
   options: {
     choices: IDropDownFieldChoice[]
@@ -51,6 +59,10 @@ export interface IMultiSelectField extends ICollectionField {
   options: {
     choices: IDropDownFieldChoice[]
   };
+}
+
+export interface ICheckboxField extends ICollectionField {
+  options: null;
 }
 
 export interface IRelationField extends ICollectionField {
@@ -65,10 +77,6 @@ export interface ICreatedAtField extends ICollectionField {
 }
 
 export interface IUpdatedAtField extends ICollectionField {
-  options: null;
-}
-
-export interface ICheckboxField extends ICollectionField {
   options: null;
 }
 

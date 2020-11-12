@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { ILineField } from '../../../types/database';
+import { ILongTextField } from '../../../types/database';
 import { IFieldComponent } from '../../../types/components';
 
-interface CILineField extends IFieldComponent {
-  field: ILineField;
+interface CILongTextField extends IFieldComponent {
+  field: ILongTextField;
 }
 
-const LongText: FC<CILineField> = ({
+const LongText: FC<CILongTextField> = ({
   field,
   record,
   edit,
@@ -27,11 +27,12 @@ const LongText: FC<CILineField> = ({
   
   return (
     <textarea
+      value={data}
       style={style}
       onChange={onChange}
       onFocus={onFocus}
       onBlur={onBlur}
-    >{data || ''}</textarea>
+    />
   )
 }
 
