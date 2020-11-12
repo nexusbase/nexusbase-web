@@ -1,47 +1,58 @@
 
-export const types = [
+export default [
     {
         name: 'line',
-        label: 'Line'
+        label: 'Line',
+        source: 'string'
     },
     {
         name: 'number',
-        label: 'Number'
+        label: 'Number',
+        source: 'string'
     },
     {
         name: 'email',
-        label: 'Email'
+        label: 'Email',
+        source: 'string'
     },
     {
         name: 'url',
-        label: 'Url'
+        label: 'Url',
+        source: 'string'
     },
     {
         name: 'longtext',
-        label: 'Long text'
+        label: 'Long text',
+        source: 'string'
     },
     {
         name: 'dropdown',
-        label: 'Dropdown'
+        label: 'Dropdown',
+        source: 'array'
     },
     {
         name: 'multiSelect',
-        label: 'Multi select'
+        label: 'Multi select',
+        source: 'array'
     },
     {
         name: 'checkbox',
-        label: 'Checkbox'
+        label: 'Checkbox',
+        source: 'boolean'
     },
     {
         name: 'relation',
-        label: 'Relation'
+        label: 'Relation',
+        source: 'array'
     },
     {
         name: 'createdAt',
-        label: 'Create time'
+        label: 'Create time',
+        source: 'record'
     },
     {
         name: 'updatedAt',
-        label: 'Last modified time'
+        label: 'Last modified time',
+        source: 'record'
     },
 ];
