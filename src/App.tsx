@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { appRoutes } from './config/routes';
+import Dialog from './components/organisms/Dialog';
 
 const  App: FC = () => (
   <Router>
@@ -14,6 +15,7 @@ const  App: FC = () => (
         />
       )}
     </Switch>
+    <Dialog />
   </Router>
 );
 
