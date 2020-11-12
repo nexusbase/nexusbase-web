@@ -2,7 +2,7 @@ import React, { FC, FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import IRootStore from '../../../types/store/root';
 import { ICollectionField } from '../../../types/database';
-import { types as fieldTypes } from '../../../config/fields';
+import fieldsData from '../../../config/fields';
 import Select from 'react-select';
 import Button from '../../atoms/Button';
 import TextInput from '../../atoms/TextInput';
@@ -19,7 +19,7 @@ const EditFieldForm: FC<CIEditFieldForm> = ({ collectionId, field, setIsEditing 
   const { collection, isUpdating } = useSelector(({
     collections: { collection, isUpdating }
   }: IRootStore) => ({ collection, isUpdating }));
-  const fieldTypeOptions = fieldTypes.map((type: any) => ({ value: type.name, label: type.label }));
+  const fieldTypeOptions = fieldsData.map((type: any) => ({ value: type.name, label: type.label }));
   const [fieldForm, setFieldForm] = useState(field);
   const [isFirstUpdate, setIsFirstUpdate] = useState(true);
   const selectedFieldTypeOption = fieldTypeOptions.find((option) => option.value === fieldForm.type);
