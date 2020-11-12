@@ -27,7 +27,7 @@ const EditFieldForm: FC<CIEditFieldForm> = ({ collectionId, field, setIsEditing 
   // check if field was updated
   useEffect(() => {
     if (!isUpdating && !isFirstUpdate) {
-      setIsEditing(false);
+      //setIsEditing(false);
     }
     setIsFirstUpdate(false);
   }, [collection, isUpdating, isFirstUpdate, setIsFirstUpdate, setIsEditing]);

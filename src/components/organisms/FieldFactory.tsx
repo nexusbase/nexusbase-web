@@ -10,9 +10,9 @@ import MultiSelectField from '../molecules/MultiSelectField';
 import CreatedAt from '../molecules/CreatedAt'
 import UpdatedAt from '../molecules/UpdatedAt'
 import Checkbox from '../molecules/CheckboxField'
+import LongText from '../molecules/LongText';
 /*
 import DateField from '../molecules/DateField/DateField';
-import TextBoxField from '../molecules/TextBoxField/TextBoxField';
 */
 
 const FieldFactory = (props: any) => {
@@ -37,11 +37,11 @@ const FieldFactory = (props: any) => {
       return <UpdatedAt { ...props } />;
     case 'checkbox':
       return <Checkbox { ...props } />;
+    case 'longtext':
+      return <LongText { ...props } />;
     /*
     case 'date':
       return <DateField { ...props } />;
-    case 'textbox':
-      return <TextBoxField { ...props } />;
     */
     default:
       return (
