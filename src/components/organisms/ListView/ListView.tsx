@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import ListGroups from './ListGroups';
 import ListRows from './ListRows';
 import FieldWidget from '../FieldWidget';
+import { FaPlus } from 'react-icons/fa';
 
 interface CIListView {
   view: IViewModel;
@@ -40,6 +41,7 @@ const ListView: FC<CIListView> = ({ view }) => {
               <FieldWidget field={viewField} />
             </th>
           )}
+          <th><FaPlus /></th>
         </tr>
       </thead>
       <tbody>
