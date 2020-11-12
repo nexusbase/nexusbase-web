@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import { ICollectionField } from '../types/database';
 import {
   ICollectionActionTypes as types,
   CreateCollectionStart,
@@ -9,6 +10,8 @@ import {
   GetCollectionSuccess,
   ClearCollections,
   ClearCollection,
+  UpdateFieldStart,
+  UpdateFieldSuccess,
 } from '../types/store/collections';
 import IRootStore from '../types/store/root';
 
@@ -95,14 +98,45 @@ export const getCollection = (collectionId: string) => {
       return;
     }
 
-    const { item: collection, related: relatedCollections } = response.data.collection;
-
+    const { collection, related: relatedCollections } = response.data.collection;
     const getCollectionSuccess: GetCollectionSuccess = {
       type: types.GET_COLLECTION_SUCCESS,
       payload: { collection, relatedCollections }
     };
     
     dispatch(getCollectionSuccess);
+  }
+}
+
+export const updateField = (collectionId: string, fieldId: string, data: ICollectionField) => {
+  return (dispatch: Dispatch) => {
+    const updateFieldStart: UpdateFieldStart = {
+      type: types.UPDATE_FIELD_START
+    };
+
+    dispatch(updateFieldStart);
+    
+    const response = ipcRenderer.sendSync('nbql', {
+      result: {
+        action: 'updateField',
+        args: { collectionId, fieldId, data }
+      }
+    });
+    
+    if (response?.errors?.collection) {
+      console.log({ recordError: response.errors.collection });
+      return;
+    }
+
+    const updateFieldSuccess: UpdateFieldSuccess = {
+      type: types.UPDATE_FIELD_SUCCESS,
+      payload: {
+        collection: response.data.result.collection,
+        relatedCollections: response.data.result.related
+      }
+    };
+    
+    dispatch(updateFieldSuccess);
   }
 }
 

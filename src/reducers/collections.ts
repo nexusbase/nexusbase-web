@@ -7,6 +7,7 @@ export const initialState: ICollectionsState = {
   isFetchingOne: false,
   isFetchingList: false,
   isCreating: false,
+  isUpdating: false,
   collections: [],
   relatedCollections: [],
   collection: null,
@@ -55,6 +56,20 @@ export default (
         ...state,
         ...action.payload,
         isFetchingOne: false
+      };
+    }
+
+    case types.UPDATE_FIELD_START: {
+      return {
+        ...state,
+        isUpdating: true
+      };
+    }
+    case types.UPDATE_FIELD_SUCCESS: {
+      return {
+        ...state,
+        ...action.payload,
+        isUpdating: false
       };
     }
 

@@ -1,34 +1,25 @@
 import { IRecordModel, ICollectionField } from "../types/database";
+import fieldsData from '../config/fields';
 
-const stringFields = ['line', 'number', 'email', 'url', 'date', 'time', 'dropdown'];
-const arrayFields = ['relation', 'multiSelect', ];
+const stringFields = fieldsData.filter((field) => field.source === 'string');
+const arrayFields = fieldsData.filter((field) => field.source === 'array');
 
 /**
  * Is used to make sure that when a record is passed to the form no fields are missing
  */
 const recordTemplate = (template: ICollectionField[], data: any): IRecordModel => {
-  let record: IRecordModel = {
-    id: data.id,
-    collectionId: data.collectionId,
-    fields: {},
-    createdAt: data.createdAt,
-    updatedAt: data.updatedAt
-  };
+  let record = { ...data };
   
   for (const field of template) {
-    let value = data.fields[field.id];
-
-    if (value === undefined) {
-      if (stringFields.includes(field.type)) {
-        value = "";
+    if (!data.fields.hasOwnProperty(field.id)) {
+      if (stringFields.find((fieldData) => fieldData.name === field.type)) {
+        record.fields[field.id] = "";
       }
       
-      if (arrayFields.includes(field.type)) {
-        value = [];
+      if (arrayFields.find((fieldData) => fieldData.name === field.type)) {
+        record.fields[field.id] = [];
       }
     }
-
-    record.fields[field.id] = value;
   }
 
   return record;

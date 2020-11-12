@@ -97,7 +97,9 @@ const RecordForm: FC<CIRecordForm> = ({ recordId }) => {
       </Card>
     )
   }
-  
+
+  const buttonStyle = { width: '4em', marginRight: "1em" };
+
   return (
     <Card
       containerStyle={{
@@ -106,30 +108,29 @@ const RecordForm: FC<CIRecordForm> = ({ recordId }) => {
       }}
     >
       <div className="buttons" style={{ marginTop: '20px' }}>
+        {formIsDirty ?
+          <Button
+            className="btn"
+            style={buttonStyle}
+            onClick={() => editRecord(cleanRecord)}
+          >Undo</Button>
+          :
+          <Button
+            className="btn"
+            style={buttonStyle}
+            onClick={handleCloseButtonClick}
+          >Close</Button>
+        }
+        <Button
+          className="btn btn-primary"
+          style={buttonStyle}
+          onClick={submitRecord}
+        >Update</Button>
         <Button
           className="btn"
-          style={{ marginRight: "10px" }}
-          disabled={false}
-          onClick={handleCloseButtonClick}
-        >close</Button>
-        <Button
-          className="btn"
-          style={{ marginRight: "10px" }}
+          style={buttonStyle}
           onClick={handleDeleteButtonClick}
         >Delete</Button>
-        {formIsDirty &&
-          <>
-            <Button
-              className="btn"
-              style={{ marginRight: "10px" }}
-              onClick={() => editRecord(cleanRecord)}
-            >Undo changes</Button>
-            <Button
-              className="btn btn-primary"
-              onClick={submitRecord}
-            >Update</Button>
-          </>
-        }
       </div>
       <p style={{ color: '#555' }}>{`Record ID: ${record.id}`}</p>
       {collection.fields.map((collectionField) =>
