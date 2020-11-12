@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { ILongTextField } from '../../../types/database';
+import { IDateField } from '../../../types/database';
 import { IFieldComponent } from '../../../types/components';
 
-interface CILongTextField extends IFieldComponent {
-  field: ILongTextField;
+interface CIDateField extends IFieldComponent {
+  field: IDateField;
 }
 
-const LongText: FC<CILongTextField> = ({
+const DateField: FC<CIDateField> = ({
   field,
   record,
   edit,
@@ -26,8 +26,9 @@ const LongText: FC<CILongTextField> = ({
   }
   
   return (
-    <textarea
-      value={data}
+    <input
+      type="date"
+      value={data || ''}
       style={style}
       onChange={onChange}
       onFocus={onFocus}
@@ -36,4 +37,4 @@ const LongText: FC<CILongTextField> = ({
   )
 }
 
-export default LongText;
+export default DateField;

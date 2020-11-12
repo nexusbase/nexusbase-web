@@ -134,7 +134,7 @@ const ReadCollectionPage: FC = () => {
     <BrowseRecordsTemplate
       breadcrumbs={
         <>        
-          <Link to={routes.home}>Workspaces</Link> >
+          <Link to={routes.home}>Workspaces</Link> >&nbsp;
           <Link to={url(routes.workspaces.read, { workspaceId: workspace.id })}>{workspace.name}</Link>
         </>
       }
