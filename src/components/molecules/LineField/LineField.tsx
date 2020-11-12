@@ -6,7 +6,7 @@ interface CILineField extends IFieldComponent {
   field: ILineField;
 }
 
-const LongText: FC<CILineField> = ({
+const LineField: FC<CILineField> = ({
   field,
   record,
   edit,
@@ -37,4 +37,4 @@ const LongText: FC<CILineField> = ({
   )
 }
 
-export default LongText;
+export default LineField;
