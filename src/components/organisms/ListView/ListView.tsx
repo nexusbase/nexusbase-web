@@ -36,6 +36,7 @@ const ListView: FC<CIListView> = ({ view }) => {
     <table>
       <thead>
         <tr>
+          <th></th>
           {viewFields.map((viewField: ICollectionField, index: number) =>
             <th key={index}>
               <FieldWidget field={viewField} />
