@@ -23,30 +23,35 @@ const ListGroups: FC<CIListGroups> = ({ viewFields, records, by }) => {
     label: `No ${field.label}`
   };
   const hasEmpty: boolean = groupWithValueEmpty.length > 0;
-
   const choices = hasEmpty ? [ emptyChoice, ...field.options.choices ] : field.options.choices;
   const groups = hasEmpty ? { empty: groupWithValueEmpty, ...rawGroups } : rawGroups;
   let rowGroups = [];
+  let rowCount = 1;
 
   for (const choice of choices) {
     const records = groups[choice.value];
 
     if (!records) continue;
+    
+    rowGroups.push({
+      startCount: rowCount,
+      RowGroup: ({ startRowCount }:{ startRowCount: number }) => (
+        <>
+          <tr className="no-hover">
+            <td colSpan={viewFields.length}>({field.label}): {choice.label}</td>
+          </tr>
+          <ListRows {...{ viewFields, records, startRowCount }} />
+        </>
+      )
+    });
 
-    rowGroups.push(() => (
-      <>
-        <tr className="no-hover">
-          <td colSpan={viewFields.length}>({field.label}): {choice.label}</td>
-        </tr>
-        <ListRows {...{ viewFields, records }} />
-      </>
-    ));
+    rowCount += records.length;
   }
-
+  
   return (
     <>
-      {rowGroups.map((RowGroup: any, index) =>
-        <RowGroup key={index} />
+      {rowGroups.map(({ startCount, RowGroup }: any, index) =>
+        <RowGroup key={index} startRowCount={startCount} />
       )}
     </>
   )
