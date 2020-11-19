@@ -8,6 +8,7 @@ import RecordField from './RecordField';
 import { IRecordModel } from '../../../types/database';
 import { useHistory, useLocation } from 'react-router-dom';
 import Button from '../../atoms/Button';
+import Modal from '../../molecules/Modal';
 
 interface CIRecordForm {
   recordId: string;
@@ -101,47 +102,49 @@ const RecordForm: FC<CIRecordForm> = ({ recordId }) => {
   const buttonStyle = { width: '4em', marginRight: "1em" };
 
   return (
-    <Card
-      containerStyle={{
-        width: '80%',
-        height: '75%',
-      }}
-    >
-      <div className="buttons" style={{ marginTop: '20px' }}>
-        {formIsDirty ?
+    <Modal>
+      <Card
+        containerStyle={{
+          width: '80%',
+          margin: 'auto'
+        }}
+      >
+        <div className="buttons" style={{ marginTop: '20px' }}>
+          {formIsDirty ?
+            <Button
+              className="btn"
+              style={buttonStyle}
+              onClick={() => editRecord(cleanRecord)}
+            >Undo</Button>
+            :
+            <Button
+              className="btn"
+              style={buttonStyle}
+              onClick={handleCloseButtonClick}
+            >Close</Button>
+          }
+          <Button
+            className="btn btn-primary"
+            style={buttonStyle}
+            onClick={submitRecord}
+          >Update</Button>
           <Button
             className="btn"
             style={buttonStyle}
-            onClick={() => editRecord(cleanRecord)}
-          >Undo</Button>
-          :
-          <Button
-            className="btn"
-            style={buttonStyle}
-            onClick={handleCloseButtonClick}
-          >Close</Button>
-        }
-        <Button
-          className="btn btn-primary"
-          style={buttonStyle}
-          onClick={submitRecord}
-        >Update</Button>
-        <Button
-          className="btn"
-          style={buttonStyle}
-          onClick={handleDeleteButtonClick}
-        >Delete</Button>
-      </div>
-      <p style={{ color: '#555' }}>{`Record ID: ${record.id}`}</p>
-      {collection.fields.map((collectionField) =>
-        <RecordField
-          key={collectionField.id}
-          field={collectionField}
-          record={record}
-          update={(value: any) => updateField(collectionField.id, value)}
-        />
-      )}
-    </Card>
+            onClick={handleDeleteButtonClick}
+          >Delete</Button>
+        </div>
+        <p style={{ color: '#555' }}>{`Record ID: ${record.id}`}</p>
+        {collection.fields.map((collectionField) =>
+          <RecordField
+            key={collectionField.id}
+            field={collectionField}
+            record={record}
+            update={(value: any) => updateField(collectionField.id, value)}
+          />
+        )}
+      </Card>
+    </Modal>
   )
 };
 

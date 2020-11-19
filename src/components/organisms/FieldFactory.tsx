@@ -35,7 +35,7 @@ const FieldFactory = (props: any) => {
       return <UpdatedAt { ...props } />;
     case 'checkbox':
       return <Checkbox { ...props } />;
-    case 'longtext':
+    case 'longText':
       return <LongText { ...props } />;
     case 'date':
       return <DateField { ...props } />;

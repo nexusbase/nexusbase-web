@@ -126,7 +126,8 @@ export default (
       return {
         ...state,
         records: [],
-        relatedToRecords: []
+        relatedToRecords: [],
+        isSorting: false
       };
     }
 
