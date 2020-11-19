@@ -1,8 +1,12 @@
 import React from 'react';
 
-const Card = ({ children }: any) => {
+const Card = ({ children, containerStyle }: any) => {
   return (
-    <div>{children}</div>
+    <div style={{
+      ...containerStyle,
+      backgroundColor: '#ffffff',
+      padding: '15px',
+    }}>{children}</div>
   );
 }
 

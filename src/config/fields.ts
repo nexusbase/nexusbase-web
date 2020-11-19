@@ -21,7 +21,7 @@ export default [
         source: 'string'
     },
     {
-        name: 'longtext',
+        name: 'longText',
         label: 'Long text',
         source: 'string'
     },

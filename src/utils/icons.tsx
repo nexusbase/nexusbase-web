@@ -41,7 +41,7 @@ export const fieldIcon = (type: string) => {
       return <FaRegCalendarCheck />;
     case 'checkbox':
       return <FaCheckSquare />;
-    case 'longtext':
+    case 'longText':
       return <FaAlignJustify />;
     default:
       return <Caution details={`No icon found for field type: ${type}`}/>;

@@ -38,7 +38,7 @@ const ListGroups: FC<CIListGroups> = ({ viewFields, records, by }) => {
       RowGroup: ({ startRowCount }:{ startRowCount: number }) => (
         <>
           <tr className="no-hover">
-            <td colSpan={viewFields.length}>({field.label}): {choice.label}</td>
+            <td colSpan={viewFields.length + 1}>({field.label}): {choice.label}</td>
           </tr>
           <ListRows {...{ viewFields, records, startRowCount }} />
         </>
