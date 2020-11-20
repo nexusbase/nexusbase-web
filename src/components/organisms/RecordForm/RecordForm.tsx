@@ -32,6 +32,7 @@ const RecordForm: FC<CIRecordForm> = ({ recordId }) => {
   const [record, editRecord] = useState(emptyRecord);
   const [cleanRecord, setCleanRecord] = useState(emptyRecord);
   const [recordSubmitted, setRecordSubmitted] = useState(false);
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
   const formIsDirty = JSON.stringify(cleanRecord.fields) !== JSON.stringify(record.fields);
   
   useEffect(() => {
@@ -131,8 +132,24 @@ const RecordForm: FC<CIRecordForm> = ({ recordId }) => {
           <Button
             className="btn"
             style={buttonStyle}
-            onClick={handleDeleteButtonClick}
+            onClick={() => setConfirmingDelete(true)}
           >Delete</Button>
+        </div>
+        {confirmingDelete &&
+          <div className="buttons" style={{ marginTop: '20px' }}>
+            <Button
+              className="btn"
+              style={buttonStyle}
+              onClick={handleDeleteButtonClick}
+            >Yes</Button>
+            <Button
+              className="btn"
+              style={buttonStyle}
+              onClick={() => setConfirmingDelete(false)}
+            >No</Button>
+          </div>
+        }
+        <div>
         </div>
         <p style={{ color: '#555' }}>{`Record ID: ${record.id}`}</p>
         {collection.fields.map((collectionField) =>
