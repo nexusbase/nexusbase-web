@@ -14,9 +14,9 @@ module.exports = {
     ]),
   ),
   paths: function (paths, env) {        
-    //paths.appPublic = path.join('web');
-    paths.appHtml = path.join('web/index.html');
-    paths.appBuild = path.join('build/web');
+    paths.appPublic = path.resolve('web');
+    paths.appHtml = path.resolve('web/index.html');
+    paths.appBuild = path.resolve('build/web');
     return paths;
   },
 };
