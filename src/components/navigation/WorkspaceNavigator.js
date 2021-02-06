@@ -1,15 +1,14 @@
 import React from 'react';
+import routes from '../constants/routes';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Drawer, DrawerItem, Icon } from '@ui-kitten/components';
-import Home from './screens/Home';
-import About from './screens/About';
+import WorkspacesAdd from './screens/Workspaces.add';
 
 const WorkspaceDrawer = createDrawerNavigator();
 
 const WorkspaceDrawerContent = ({ navigation, state }) => {
   const workspaceRoutes = [
-    { name: 'HOME' },
-    { name: 'ABOUT' },
+    routes.WorkspacesAdd
   ];
 
   const createDrawerItem = (route, index) => {
@@ -30,21 +29,14 @@ const WorkspaceDrawerContent = ({ navigation, state }) => {
   );
 };
 
-export const WorkspaceNavigator = () => (
-  <WorkspaceDrawer.Navigator drawerContent={props => <WorkspaceDrawerContent {...props} />}>
-    <WorkspaceDrawer.Screen
-      name={'HOME'}
-      component={Home}
-      options={{ title: 'Home', drawerIcon: <Icon name="star" /> }}
-    />
-    <WorkspaceDrawer.Screen
-      name={'ABOUT'}
-      component={About}
-      options={{ title: 'About' }}
-    />
-  </WorkspaceDrawer.Navigator>
-);
-
-export default () => (
-  <WorkspaceNavigator />
-);
+export default function() {
+  return (
+    <WorkspaceDrawer.Navigator drawerContent={props => <WorkspaceDrawerContent {...props} />}>
+      <WorkspaceDrawer.Screen
+        name={routes.WorkspacesAdd.name}
+        component={WorkspacesAdd}
+        options={{ title: 'Home', drawerIcon: <Icon name="star" /> }}
+      />
+    </WorkspaceDrawer.Navigator>
+  );
+}
