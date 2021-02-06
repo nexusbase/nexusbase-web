@@ -3,10 +3,6 @@ import * as path from "path";
 import * as isDev from "electron-is-dev";
 import installExtension, { REACT_DEVELOPER_TOOLS } from "electron-devtools-installer";
 
-try {
-  require('electron-reloader')(module)
-} catch (_) {}
-
 let mainWindow: Electron.BrowserWindow;
 
 function createWindow() {
@@ -32,8 +28,8 @@ function createWindow() {
   if (isDev) {
     mainWindow.webContents.openDevTools();
     
-    // Install React Dev Tools    
     /*
+    // Install React Dev Tools    
     installExtension(REACT_DEVELOPER_TOOLS)
     .then((name:string) => {
       console.log(`Added Extension:  ${name}`);
