@@ -7,15 +7,17 @@ import { Provider as ReduxProvider } from 'react-redux';
 import AppNavigator from './navigation';
 import store from '../services/reduxStore';
 
-export default () => (
-  <>
-    <IconRegistry icons={EvaIconsPack}/>
-    <KittenAppProvider {...eva} theme={eva.light}>
-      <ReduxProvider store={store}>
-        <NavigationContainer>
-          <AppNavigator />
-        </NavigationContainer>
-      </ReduxProvider>
-    </KittenAppProvider>
-  </>
-);
+export default () => {
+  return (
+    <>
+      <IconRegistry icons={EvaIconsPack}/>
+      <KittenAppProvider {...eva} theme={eva.light}>
+        <ReduxProvider store={store}>
+          <NavigationContainer>
+            <AppNavigator />
+          </NavigationContainer>
+        </ReduxProvider>
+      </KittenAppProvider>
+    </>
+  );
+}

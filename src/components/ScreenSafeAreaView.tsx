@@ -14,7 +14,6 @@ export default ({ children }) => {
   
   return (
     <SafeAreaView style={getStyles()}>
-      <TopNav />
       {children}
     </SafeAreaView>
   );

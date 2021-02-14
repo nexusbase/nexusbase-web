@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import {
   Button,
   Icon,
@@ -7,6 +7,8 @@ import {
   Text,
 } from '@ui-kitten/components';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
+import routes from '../../constants/routes';
+import { useNavigation } from '@react-navigation/native';
 
 /**
  * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)
@@ -17,22 +19,19 @@ const HeartIcon = (props) => (
 );
 
 export default () => {
+  const navigation = useNavigation();
 
   return (
     <ScreenSafeAreaView>
       <Layout style={styles.container}>
         <Text style={styles.text} category="h1">
-          Welcome to UI Kitten 😻
+          Intro
         </Text>
-        <Text style={styles.text} category="s1">
-          Start with editing App.js to configure your App
-        </Text>
-        <Text style={styles.text} appearance="hint">
-          For example, try changing theme to Dark by using eva.dark
-        </Text>
-        <Button style={styles.likeButton} accessoryLeft={HeartIcon}>
-          LIKE
+        <View>
+        <Button onPress={() => navigation.navigate(routes.WorkspacesAdd.name)}>
+          Add workspace
         </Button>
+        </View>
       </Layout>
     </ScreenSafeAreaView>
   );

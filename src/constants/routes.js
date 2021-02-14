@@ -1,7 +1,7 @@
 
 export default {
-  WorkspacesBrowse: {
-    name: 'WorkspacesBrowse',
+  Intro: {
+    name: 'Intro',
   },
   WorkspacesAdd: {
     name: 'WorkspacesAdd',

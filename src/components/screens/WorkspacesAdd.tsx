@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import {
   Button,
   Icon,
+  Input,
   Layout,
   Text,
 } from '@ui-kitten/components';
@@ -18,21 +19,19 @@ const HeartIcon = (props) => (
 
 export default () => {
 
+  const [value, setValue] = React.useState('');
+
   return (
     <ScreenSafeAreaView>
       <Layout style={styles.container}>
         <Text style={styles.text} category="h1">
-          Welcome to UI Kitten 😻
+          Add workspace
         </Text>
-        <Text style={styles.text} category="s1">
-          Start with editing App.js to configure your App
-        </Text>
-        <Text style={styles.text} appearance="hint">
-          For example, try changing theme to Dark by using eva.dark
-        </Text>
-        <Button style={styles.likeButton} accessoryLeft={HeartIcon}>
-          LIKE
-        </Button>
+        <Input
+          placeholder='Place your Text'
+          value={value}
+          onChangeText={nextValue => setValue(nextValue)}
+        />
       </Layout>
     </ScreenSafeAreaView>
   );

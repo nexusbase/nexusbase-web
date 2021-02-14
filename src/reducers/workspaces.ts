@@ -1,14 +1,22 @@
-import { initialState, actionTypes } from '../constants/redux/workspaces';
-  
-export default (state = initialState, action) => {
+import IState, { IActionTypes, IWorkspacesAction } from '../types/store/workspaces';
+
+export const initialState = {
+  isFetchingOne: false,
+  isFetchingList: false,
+  isCreating: false,
+  workspaces: [],
+  workspace: null,
+};
+
+export default (state: IState = initialState, action: IWorkspacesAction) => {
   switch (action.type) {
-    case actionTypes.CREATE_WORKSPACE_START: {
+    case IActionTypes.CREATE_WORKSPACE_START: {
       return {
         ...state,
         isCreating: true,
       };
     }
-    case actionTypes.CREATE_WORKSPACE_SUCCESS: {
+    case IActionTypes.CREATE_WORKSPACE_SUCCESS: {
       return {
         ...state,
         ...action.payload,
@@ -16,27 +24,27 @@ export default (state = initialState, action) => {
       };
     }
 
-    case actionTypes.GET_WORKSPACES_START: {
+    case IActionTypes.GET_WORKSPACES_START: {
       return {
         ...state,
         isFetchingList: true,
       };
     }
-    case actionTypes.GET_WORKSPACES_SUCCESS: {
+    case IActionTypes.GET_WORKSPACES_SUCCESS: {
       return {
         ...state,
-        ...action.payload,
+        workspaces: action.payload,
         isFetchingList: false,
       };
     }
 
-    case actionTypes.GET_WORKSPACE_START: {
+    case IActionTypes.GET_WORKSPACE_START: {
       return {
         ...state,
         isFetchingOne: true,
       };
     }
-    case actionTypes.GET_WORKSPACE_SUCCESS: {
+    case IActionTypes.GET_WORKSPACE_SUCCESS: {
       return {
         ...state,
         ...action.payload,
@@ -44,14 +52,14 @@ export default (state = initialState, action) => {
       };
     }
 
-    case actionTypes.CLEAR_WORKSPACES: {
+    case IActionTypes.CLEAR_WORKSPACES: {
       return {
         ...state,
         workspaces: [],
       };
     }
 
-    case actionTypes.CLEAR_WORKSPACE: {
+    case IActionTypes.CLEAR_WORKSPACE: {
       return {
         ...state,
         workspace: null,
