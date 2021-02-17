@@ -45,7 +45,7 @@ const db = (name: string, defaultValue: any) => {
 export const appDb = () => {
   return db(
     'nexusbase',
-    { workspaces: {}, lastWorkspace: null }
+    { workspaces: [], lastWorkspace: null }
   );
 }
 

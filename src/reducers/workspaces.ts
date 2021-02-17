@@ -66,7 +66,6 @@ export default (state: IState = initialState, action: IWorkspacesAction) => {
       };
     }
 
-    // do nothing
     default: {
       return state;
     }

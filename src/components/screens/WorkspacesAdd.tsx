@@ -8,17 +8,12 @@ import {
   Text,
 } from '@ui-kitten/components';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
+import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParamList } from 'src/types/navigation';
 
-/**
- * Use any valid `name` property from eva icons (e.g `github`, or `heart-outline`)
- * https://akveo.github.io/eva-icons
- */
-const HeartIcon = (props) => (
-  <Icon {...props} name="heart"/>
-);
+type Props = StackScreenProps<RootStackParamList, 'AddWorkspace'>;
 
-export default () => {
-
+export default ({ navigation }: Props) => {
   const [value, setValue] = React.useState('');
 
   return (

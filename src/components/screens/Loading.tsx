@@ -16,20 +16,35 @@ import { RootStackParamList } from 'src/types/navigation';
 
 type Props = StackScreenProps<RootStackParamList, 'Intro'>;
 
-export default ({ navigation }: Props) => (
-  <ScreenSafeAreaView>
-    <Layout style={styles.container}>
-      <Text style={styles.text} category="h1">
-        Intro
-      </Text>
-      <View>  
-      <Button onPress={() => navigation.push('AddWorkspace')}>
-        Add workspace
-      </Button>
-      </View>
-    </Layout>
-  </ScreenSafeAreaView>
-);
+export default ({ navigation }: Props) => {
+  const dispatch = useDispatch();
+  const { dataLoaded, workspaces } = useSelector((state: RootStore) => ({
+    dataLoaded: state.app.dataLoaded,
+    workspaces: state.workspaces.workspaces,
+  }));
+
+  useEffect(() => {
+    dispatch(getAppDataStart());
+  }, [])
+
+  useEffect(() => {
+    if (dataLoaded) {
+      if (workspaces.length === 0) {
+        navigation.replace('Intro');
+      }
+    }
+  }, [dataLoaded]);
+
+  return (
+    <ScreenSafeAreaView>
+      <Layout style={styles.container}>
+        <Text style={styles.text} category="h1">
+          Loading app...
+        </Text>
+      </Layout>
+    </ScreenSafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

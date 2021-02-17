@@ -7,7 +7,6 @@ import { IActionTypes } from '../types/store/app';
 export function* fetchAppData() {
   try {
     const db = yield call(appDb);
-    console.log({db})
     const appData = db.getState();
     yield put(getWorkspacesSuccess(appData.workspaces));
     yield put(getAppDataSuccess(appData.lastWorkspace));

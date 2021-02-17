@@ -15,7 +15,22 @@ export default (state = initialState, action: IAppAction): IState => {
       };
     }
 
-    // do nothing
+    case IActionTypes.GET_APP_DATA_FAILED: {
+      return {
+        ...state,
+        dataLoaded: false,
+        isLoadingAppData: false,
+      }
+    }
+
+    case IActionTypes.GET_APP_DATA_SUCCESS: {
+      return {
+        ...state,
+        dataLoaded: true,
+        isLoadingAppData: false,
+      }
+    }
+
     default: {
       return state;
     }
