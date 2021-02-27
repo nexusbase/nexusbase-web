@@ -4,11 +4,12 @@ export const initialState = {
   isFetchingOne: false,
   isFetchingList: false,
   isCreating: false,
+  isNew: false,
   workspaces: [],
   workspace: null,
 };
 
-export default (state: IState = initialState, action: IWorkspacesAction) => {
+export default (state: IState = initialState, action: IWorkspacesAction): IState => {
   switch (action.type) {
     case IActionTypes.CREATE_WORKSPACE_START: {
       return {
@@ -19,8 +20,9 @@ export default (state: IState = initialState, action: IWorkspacesAction) => {
     case IActionTypes.CREATE_WORKSPACE_SUCCESS: {
       return {
         ...state,
-        ...action.payload,
+        workspace: action.payload,
         isCreating: false,
+        isNew: true,
       };
     }
 
@@ -47,7 +49,7 @@ export default (state: IState = initialState, action: IWorkspacesAction) => {
     case IActionTypes.GET_WORKSPACE_SUCCESS: {
       return {
         ...state,
-        ...action.payload,
+        workspace: action.payload,
         isFetchingOne: false,
       };
     }

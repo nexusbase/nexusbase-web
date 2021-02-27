@@ -49,9 +49,9 @@ export const appDb = () => {
   );
 }
 
-export const workspaceDb = () => {
+export const workspaceDb = (WorkspaceId: string = 'nexusbase') => {
   return db(
-    'nexusbase',
+    WorkspaceId,
     { workspace: {}, collections: [], views: [], records: [] }
   );
 }

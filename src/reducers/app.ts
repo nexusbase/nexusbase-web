@@ -2,8 +2,8 @@ import IState, { IActionTypes, IAppAction } from '../types/store/app';
 
 export const initialState: IState = {
   dataLoaded: false,
+  isLoadingAppData: false,
   lastWorkspace: "",
-  isLoadingAppData: false
 };
 
 export default (state = initialState, action: IAppAction): IState => {
@@ -24,10 +24,12 @@ export default (state = initialState, action: IAppAction): IState => {
     }
 
     case IActionTypes.GET_APP_DATA_SUCCESS: {
+      const { lastWorkspace } = action.payload;
       return {
         ...state,
         dataLoaded: true,
         isLoadingAppData: false,
+        lastWorkspace,
       }
     }
 

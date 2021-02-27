@@ -18,8 +18,9 @@ type Props = StackScreenProps<RootStackParamList, 'Intro'>;
 
 export default ({ navigation }: Props) => {
   const dispatch = useDispatch();
-  const { dataLoaded, workspaces } = useSelector((state: RootStore) => ({
+  const { dataLoaded, lastWorkspace, workspaces } = useSelector((state: RootStore) => ({
     dataLoaded: state.app.dataLoaded,
+    lastWorkspace: state.app.lastWorkspace,
     workspaces: state.workspaces.workspaces,
   }));
 
@@ -31,6 +32,8 @@ export default ({ navigation }: Props) => {
     if (dataLoaded) {
       if (workspaces.length === 0) {
         navigation.replace('Intro');
+      } else {
+        navigation.replace('WorkspaceHome', {id: lastWorkspace})
       }
     }
   }, [dataLoaded]);

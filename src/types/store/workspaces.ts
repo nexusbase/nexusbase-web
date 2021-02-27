@@ -4,6 +4,7 @@ export default interface IState {
   isFetchingOne: boolean,
   isFetchingList: boolean,
   isCreating: boolean,
+  isNew: boolean,
   workspaces: IWorkspaceModel[],
   workspace: null | IWorkspaceModel,
 }
@@ -21,17 +22,18 @@ export enum IActionTypes {
 
 export interface ICreateWorkspaceStart {
   type: IActionTypes.CREATE_WORKSPACE_START;
+  payload: {
+    name: string
+  };
 }
 
 export interface ICreateWorkspaceSuccess {
   type: IActionTypes.CREATE_WORKSPACE_SUCCESS;
-  payload: {
-    workspace: IWorkspaceModel;
-  }
+  payload: IWorkspaceModel;
 }
 
 export interface IGetWorkspacesStart {
-  type: IActionTypes.GET_WORKSPACES_START
+  type: IActionTypes.GET_WORKSPACES_START;
 }
 
 export interface IGetWorkspacesSuccess {
@@ -40,14 +42,13 @@ export interface IGetWorkspacesSuccess {
 }
 
 export interface IGetWorkspaceStart {
-  type: IActionTypes.GET_WORKSPACE_START
+  type: IActionTypes.GET_WORKSPACE_START;
+  payload: string;
 }
 
 export interface IGetWorkspaceSuccess {
   type: IActionTypes.GET_WORKSPACE_SUCCESS;
-  payload: {
-    workspace: IWorkspaceModel;
-  }
+  payload: IWorkspaceModel;
 }
 
 export interface IClearWorkspaces {
