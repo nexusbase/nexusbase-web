@@ -9,11 +9,8 @@ import {
   Text,
 } from '@ui-kitten/components';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
-import { StackScreenProps } from '@react-navigation/stack';
 import { useDispatch, useSelector } from 'react-redux';
 import { createWorkspacesStart } from '../../actions/workspaces';
-import { RootStackParamList } from '../../types/navigation';
-import RootStore from '../../types/store/root'
 
 const StarIcon = (props) => (
   <Icon {...props} name='star'/>
@@ -25,12 +22,10 @@ const LoadingIndicator = (props) => (
   </View>
 );
 
-type Props = StackScreenProps<RootStackParamList, 'AddWorkspace'>;
-
-export default ({ navigation }: Props) => {
+export default ({ navigation }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
-  const { isNew, workspace } = useSelector((state: RootStore) => ({
+  const { isNew, workspace } = useSelector((state) => ({
     workspace: state.workspaces.workspace,
     isNew: state.workspaces.isNew,
   }));

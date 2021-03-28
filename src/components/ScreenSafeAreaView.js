@@ -1,7 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { SafeAreaView, StyleSheet } from 'react-native';
-import TopNav from './TopNav';
 
 export default ({ children }) => {
   const getStyles = () => {

@@ -2,7 +2,6 @@ import { takeLatest, call, put} from 'redux-saga/effects';
 import { appDb } from '../services/localDatabase'
 import { getWorkspacesSuccess } from '../actions/workspaces';
 import { getAppDataFailed, getAppDataSuccess } from '../actions/app';
-import { IActionTypes } from '../types/store/app';
 
 export function* fetchAppData() {
   try {
@@ -18,5 +17,5 @@ export function* fetchAppData() {
 }
 
 export default function* () {
-  yield takeLatest(IActionTypes.GET_APP_DATA_START, fetchAppData);
+  yield takeLatest('GET_APP_DATA_START', fetchAppData);
 }

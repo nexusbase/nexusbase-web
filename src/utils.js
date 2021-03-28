@@ -1,6 +1,7 @@
 import { customAlphabet } from 'nanoid/non-secure';
 
-export function generateId(firstChar: 'w' | 'c' | 'r') {
+// todo: allow only ('w', 'c', 'i')
+export function generateId(firstChar) {
   const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz', 3)
   return firstChar + nanoid() + Date.now();
 }

@@ -5,8 +5,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 
 class AsyncStorageDriver extends Base {
-  serialize: any
-  deserialize: any
 
   read() {
     return AsyncStorage.getItem(this.source)
@@ -22,12 +20,12 @@ class AsyncStorageDriver extends Base {
     ;
   }
 
-  write(data: any) {
+  write(data) {
     AsyncStorage.setItem(this.source, this.serialize(data))
   }
 }
 
-const adapter = (dbName: string, options: any) => {
+const adapter = (dbName, options) => {
   if (Platform.OS === 'web') {
     // todo: check if there is a need to clear storage first or use driver that 
     return new LocalStorage(dbName, options);
@@ -38,7 +36,7 @@ const adapter = (dbName: string, options: any) => {
   }
 };
 
-const db = (name: string, defaultValue: any) => {
+const db = (name, defaultValue) => {
   return low(adapter(name, { defaultValue }));
 };
 
@@ -49,7 +47,7 @@ export const appDb = () => {
   );
 }
 
-export const workspaceDb = (WorkspaceId: string = 'nexusbase') => {
+export const workspaceDb = (WorkspaceId) => {
   return db(
     WorkspaceId,
     { workspace: {}, collections: [], views: [], records: [] }

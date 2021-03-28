@@ -1,21 +1,20 @@
-import IState, { IActionTypes, IAppAction } from '../types/store/app';
 
-export const initialState: IState = {
+export const initialState = {
   dataLoaded: false,
   isLoadingAppData: false,
   lastWorkspace: "",
 };
 
-export default (state = initialState, action: IAppAction): IState => {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case IActionTypes.GET_APP_DATA_START: {
+    case 'GET_APP_DATA_START': {
       return {
         ...state,
         isLoadingAppData: true,
       };
     }
 
-    case IActionTypes.GET_APP_DATA_FAILED: {
+    case 'GET_APP_DATA_FAILED': {
       return {
         ...state,
         dataLoaded: false,
@@ -23,7 +22,7 @@ export default (state = initialState, action: IAppAction): IState => {
       }
     }
 
-    case IActionTypes.GET_APP_DATA_SUCCESS: {
+    case 'GET_APP_DATA_SUCCESS': {
       const { lastWorkspace } = action.payload;
       return {
         ...state,

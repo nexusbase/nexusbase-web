@@ -10,15 +10,10 @@ import ScreenSafeAreaView from '../ScreenSafeAreaView';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAppDataStart } from '../../actions/app';
-import RootStore from '../../types/store/root'
-import { StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from 'src/types/navigation';
 
-type Props = StackScreenProps<RootStackParamList, 'Intro'>;
-
-export default ({ navigation }: Props) => {
+export default ({ navigation }) => {
   const dispatch = useDispatch();
-  const { dataLoaded, lastWorkspace, workspaces } = useSelector((state: RootStore) => ({
+  const { dataLoaded, lastWorkspace, workspaces } = useSelector((state) => ({
     dataLoaded: state.app.dataLoaded,
     lastWorkspace: state.app.lastWorkspace,
     workspaces: state.workspaces.workspaces,

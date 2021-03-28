@@ -1,8 +1,7 @@
 import React from 'react';
-import routes from '../constants/routes';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Drawer, DrawerItem, Icon } from '@ui-kitten/components';
-import WorkspacesAdd from './screens/Workspaces.add';
+import WorkspacesAdd from '../screens/AddWorkspace';
 
 const WorkspaceDrawer = createDrawerNavigator();
 
@@ -33,7 +32,7 @@ export default function() {
   return (
     <WorkspaceDrawer.Navigator drawerContent={props => <WorkspaceDrawerContent {...props} />}>
       <WorkspaceDrawer.Screen
-        name={routes.WorkspacesAdd.name}
+        name={'Add'}
         component={WorkspacesAdd}
         options={{ title: 'Home', drawerIcon: <Icon name="star" /> }}
       />

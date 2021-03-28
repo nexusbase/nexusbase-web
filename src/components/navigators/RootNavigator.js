@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { RootStackParamList } from 'src/types/navigation';
-import { Drawer, DrawerItem, Icon, Text } from '@ui-kitten/components';
 import Loading from '../screens/Loading';
 import Intro from '../screens/Intro';
 import AddWorkspace from '../screens/AddWorkspace';
 import WorkspaceHome from '../screens/WorkspaceHome';
 
 export default () => {
-  const RootStack = createStackNavigator<RootStackParamList>();
+  const RootStack = createStackNavigator();
   return (
     <RootStack.Navigator>
       <RootStack.Screen

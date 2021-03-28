@@ -1,4 +1,3 @@
-import IState, { IActionTypes, IWorkspacesAction } from '../types/store/workspaces';
 
 export const initialState = {
   isFetchingOne: false,
@@ -9,15 +8,15 @@ export const initialState = {
   workspace: null,
 };
 
-export default (state: IState = initialState, action: IWorkspacesAction): IState => {
+export default (state = initialState, action) => {
   switch (action.type) {
-    case IActionTypes.CREATE_WORKSPACE_START: {
+    case 'CREATE_WORKSPACE_START': {
       return {
         ...state,
         isCreating: true,
       };
     }
-    case IActionTypes.CREATE_WORKSPACE_SUCCESS: {
+    case 'CREATE_WORKSPACE_SUCCESS': {
       return {
         ...state,
         workspace: action.payload,
@@ -26,13 +25,13 @@ export default (state: IState = initialState, action: IWorkspacesAction): IState
       };
     }
 
-    case IActionTypes.GET_WORKSPACES_START: {
+    case 'GET_WORKSPACES_START': {
       return {
         ...state,
         isFetchingList: true,
       };
     }
-    case IActionTypes.GET_WORKSPACES_SUCCESS: {
+    case 'GET_WORKSPACES_SUCCESS': {
       return {
         ...state,
         workspaces: action.payload,
@@ -40,13 +39,13 @@ export default (state: IState = initialState, action: IWorkspacesAction): IState
       };
     }
 
-    case IActionTypes.GET_WORKSPACE_START: {
+    case 'GET_WORKSPACE_START': {
       return {
         ...state,
         isFetchingOne: true,
       };
     }
-    case IActionTypes.GET_WORKSPACE_SUCCESS: {
+    case 'GET_WORKSPACE_SUCCESS': {
       return {
         ...state,
         workspace: action.payload,
@@ -54,14 +53,14 @@ export default (state: IState = initialState, action: IWorkspacesAction): IState
       };
     }
 
-    case IActionTypes.CLEAR_WORKSPACES: {
+    case 'CLEAR_WORKSPACES': {
       return {
         ...state,
         workspaces: [],
       };
     }
 
-    case IActionTypes.CLEAR_WORKSPACE: {
+    case 'CLEAR_WORKSPACE': {
       return {
         ...state,
         workspace: null,

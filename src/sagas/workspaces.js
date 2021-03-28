@@ -4,10 +4,9 @@ import {
   createWorkspaceSuccess,
   getWorkspaceSuccess
 } from '../actions/workspaces';
-import { IActionTypes, ICreateWorkspaceStart, IGetWorkspaceStart } from '../types/store/workspaces';
 import { generateId } from '../utils';
 
-export function* createWorkspaceSaga(action: ICreateWorkspaceStart) {
+export function* createWorkspaceSaga(action) {
   try {
     const db = yield call(appDb);
     const workspace = { id: generateId('w'), ...action.payload };
@@ -21,7 +20,7 @@ export function* createWorkspaceSaga(action: ICreateWorkspaceStart) {
   }
 }
 
-export function* getWorkspaceSaga(action: IGetWorkspaceStart) {
+export function* getWorkspaceSaga(action) {
   try {
     const db = yield call(workspaceDb, action.payload);
     console.log({db});
@@ -34,6 +33,6 @@ export function* getWorkspaceSaga(action: IGetWorkspaceStart) {
 }
 
 export default function* () {
-  yield takeLatest(IActionTypes.CREATE_WORKSPACE_START, createWorkspaceSaga);
-  yield takeLatest(IActionTypes.GET_WORKSPACE_START, getWorkspaceSaga);
+  yield takeLatest('CREATE_WORKSPACE_START', createWorkspaceSaga);
+  yield takeLatest('GET_WORKSPACE_START', getWorkspaceSaga);
 }
