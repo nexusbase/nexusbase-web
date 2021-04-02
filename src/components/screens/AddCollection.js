@@ -10,54 +10,44 @@ import {
 } from '@ui-kitten/components';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
 import { useDispatch, useSelector } from 'react-redux';
-import { createWorkspacesStart, getWorkspaceStart } from '../../actions/workspaces';
-import { useIsFocused } from '@react-navigation/native';
+import { createCollectionStart } from '../../actions/collections';
 
 const StarIcon = (props) => (
   <Icon {...props} name='star'/>
 );
 
-const LoadingIndicator = (props) => (
-  <View style={props.style}>
-    <Spinner size='small'/>
-  </View>
-);
-
-export default ({ navigation, route }) => {
+export default ({ navigation }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
-  const isFocused = useIsFocused();
-  const { workspace, isFetchingOne } = useSelector((state) => ({
+  const { newId, workspace } = useSelector((state) => ({
     workspace: state.workspaces.workspace,
-    isFetchingOne: state.workspaces.isFetchingOne,
-    isNew: state.workspaces.isNew,
+    newId: state.collections.newId,
   }));
-  console.log({isFetchingOne})
-
+  
   useEffect(() => {
-    if (isFocused) {
-      dispatch(getWorkspaceStart(route.params.id));
+    if(newId) {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'ViewCollection', params: {id: newId} }],
+      });
     }
-  }, [isFocused]);
-
-  if (!workspace) {
-    return (
-      <ScreenSafeAreaView>
-        <Layout style={styles.container}>
-          <Text style={styles.text} category="h1">
-            Loading workspace...
-          </Text>
-        </Layout>
-      </ScreenSafeAreaView>
-    );
-  }
+  }, [newId]);
 
   return (
     <ScreenSafeAreaView>
       <Layout style={styles.container}>
         <Text style={styles.text} category="h1">
-          Workspace Home
+          Add collection
         </Text>
+        <Input
+          placeholder='Place your Text'
+          value={name}
+          onChangeText={nextValue => setName(nextValue)}
+        />
+        <Button
+          accessoryLeft={StarIcon}
+          onPress={() => dispatch(createCollectionStart(name))}
+        >Add</Button>
       </Layout>
     </ScreenSafeAreaView>
   );

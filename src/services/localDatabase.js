@@ -4,6 +4,8 @@ import Base from 'lowdb/adapters/Base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 
+//AsyncStorage.clear();
+
 class AsyncStorageDriver extends Base {
 
   read() {
@@ -50,6 +52,11 @@ export const appDb = () => {
 export const workspaceDb = (WorkspaceId) => {
   return db(
     WorkspaceId,
-    { workspace: {}, collections: [], views: [], records: [] }
+    {
+      workspace: {},
+      collections: [],
+      views: [],
+      items: [],
+    }
   );
 }

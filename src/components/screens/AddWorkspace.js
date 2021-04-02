@@ -10,34 +10,27 @@ import {
 } from '@ui-kitten/components';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
 import { useDispatch, useSelector } from 'react-redux';
-import { createWorkspacesStart } from '../../actions/workspaces';
+import { createWorkspaceStart } from '../../actions/workspaces';
 
 const StarIcon = (props) => (
   <Icon {...props} name='star'/>
 );
 
-const LoadingIndicator = (props) => (
-  <View style={props.style}>
-    <Spinner size='small'/>
-  </View>
-);
-
 export default ({ navigation }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
-  const { isNew, workspace } = useSelector((state) => ({
-    workspace: state.workspaces.workspace,
-    isNew: state.workspaces.isNew,
+  const { newId, workspace } = useSelector((state) => ({
+    newId: state.workspaces.newId,
   }));
   
   useEffect(() => {
-    if(isNew && workspace) {
+    if(newId) {
       navigation.reset({
         index: 0,
-        routes: [{ name: 'WorkspaceHome', params: {id: workspace.id} }],
+        routes: [{ name: 'ViewWorkspace', params: {id: newId} }],
       });
     }
-  }, [isNew, workspace]);
+  }, [newId]);
 
   return (
     <ScreenSafeAreaView>
@@ -52,7 +45,7 @@ export default ({ navigation }) => {
         />
         <Button
           accessoryLeft={StarIcon}
-          onPress={() => dispatch(createWorkspacesStart(name))}
+          onPress={() => dispatch(createWorkspaceStart(name))}
         >Add</Button>
       </Layout>
     </ScreenSafeAreaView>

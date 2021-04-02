@@ -4,6 +4,7 @@ import {
   Button,
   Icon,
   Layout,
+  Spinner,
   Text,
 } from '@ui-kitten/components';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
@@ -28,7 +29,7 @@ export default ({ navigation }) => {
       if (workspaces.length === 0) {
         navigation.replace('Intro');
       } else {
-        navigation.replace('WorkspaceHome', {id: lastWorkspace})
+        navigation.replace('ViewWorkspace', {id: lastWorkspace})
       }
     }
   }, [dataLoaded]);
@@ -37,6 +38,7 @@ export default ({ navigation }) => {
     <ScreenSafeAreaView>
       <Layout style={styles.container}>
         <Text style={styles.text} category="h1">
+          <Spinner size='giant'/>
           Loading app...
         </Text>
       </Layout>

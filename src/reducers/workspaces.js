@@ -3,7 +3,7 @@ export const initialState = {
   isFetchingOne: false,
   isFetchingList: false,
   isCreating: false,
-  isNew: false,
+  newId: null,
   workspaces: [],
   workspace: null,
 };
@@ -19,9 +19,8 @@ export default (state = initialState, action) => {
     case 'CREATE_WORKSPACE_SUCCESS': {
       return {
         ...state,
-        workspace: action.payload,
         isCreating: false,
-        isNew: true,
+        newId: action.payload,
       };
     }
 
@@ -43,6 +42,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFetchingOne: true,
+        workspaceId: action.payload,
+        newId: null,
       };
     }
     case 'GET_WORKSPACE_SUCCESS': {

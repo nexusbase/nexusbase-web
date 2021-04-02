@@ -3,7 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Loading from '../screens/Loading';
 import Intro from '../screens/Intro';
 import AddWorkspace from '../screens/AddWorkspace';
-import WorkspaceHome from '../screens/WorkspaceHome';
+import ViewWorkspace from '../screens/ViewWorkspace';
+import AddCollection from '../screens/AddCollection';
 
 export default () => {
   const RootStack = createStackNavigator();
@@ -23,8 +24,13 @@ export default () => {
         options={{ title: 'Add workspace' }}
       />
       <RootStack.Screen
-        name="WorkspaceHome"
-        component={WorkspaceHome}
+        name="ViewWorkspace"
+        component={ViewWorkspace}
+      />
+      <RootStack.Screen
+        name="AddCollection"
+        component={AddCollection}
+        options={{ title: 'Add collection' }}
       />
     </RootStack.Navigator>
   );

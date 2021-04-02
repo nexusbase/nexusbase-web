@@ -1,5 +1,5 @@
 
-export const createWorkspacesStart = (name) => ({
+export const createWorkspaceStart = (name) => ({
   type: 'CREATE_WORKSPACE_START',
   payload: { name }
 });
