@@ -19,7 +19,9 @@ class AsyncStorageDriver extends Base {
           return this.defaultValue
         }
       })
-      .catch(e => console.log({readError: e}))
+      .catch(e => {
+        throw e;
+      })
     ;
   }
 

@@ -29,9 +29,9 @@ export default ({ navigation, route }) => {
   useEffect(() => {
     if (isFocused) {
       dispatch(getWorkspaceStart(workspaceId));
-      dispatch(getCollectionsStart(workspaceId));
+      if (workspace) dispatch(getCollectionsStart());
     }
-  }, [isFocused]);
+  }, [workspace, isFocused]);
 
   if (!workspace) {
     return (

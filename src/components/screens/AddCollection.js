@@ -10,7 +10,7 @@ import {
 } from '@ui-kitten/components';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
 import { useDispatch, useSelector } from 'react-redux';
-import { createCollectionStart } from '../../actions/collections';
+import { createCollectionStart, getCollectionsStart } from '../../actions/collections';
 
 const StarIcon = (props) => (
   <Icon {...props} name='star'/>
@@ -25,7 +25,10 @@ export default ({ navigation }) => {
   }));
   
   useEffect(() => {
-    if(newId) navigation.navigate('ViewCollection', {id: newId});
+    if(newId) {
+      dispatch(getCollectionsStart());
+      navigation.navigate('ViewCollection', {id: newId});
+    }
   }, [newId]);
 
   const createCollection = () => {

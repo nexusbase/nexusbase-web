@@ -17,11 +17,12 @@ function* createCollectionSaga({ payload }) {
   }
 }
 
-function* getCollectionsSaga({ payload }) {
+function* getCollectionsSaga() {
   try {
-    const db = yield call(workspaceDb, payload);
+    const workspaceId = yield select(state => state.workspaces.workspace.id);
+    const db = yield call(workspaceDb, workspaceId);
     const collectionModel = new CollectionModel(db);
-    const collections = collectionModel.get(payload);
+    const collections = collectionModel.get(workspaceId);
     yield put(getCollectionsSuccess(collections));
 
   } catch (e) {
