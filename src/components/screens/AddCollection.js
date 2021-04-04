@@ -25,13 +25,17 @@ export default ({ navigation }) => {
   }));
   
   useEffect(() => {
-    if(newId) {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'ViewCollection', params: {id: newId} }],
-      });
-    }
+    if(newId) navigation.navigate('ViewCollection', {id: newId});
   }, [newId]);
+
+  const createCollection = () => {
+    dispatch(createCollectionStart(
+      {
+        name,
+        workspaceId: workspace.id
+      }
+    ));
+  }
 
   return (
     <ScreenSafeAreaView>
@@ -46,7 +50,7 @@ export default ({ navigation }) => {
         />
         <Button
           accessoryLeft={StarIcon}
-          onPress={() => dispatch(createCollectionStart(name))}
+          onPress={createCollection}
         >Add</Button>
       </Layout>
     </ScreenSafeAreaView>

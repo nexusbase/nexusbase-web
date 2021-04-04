@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import Loading from '../screens/Loading';
 import Intro from '../screens/Intro';
+import WorkspaceNavigator from './WorkspaceNavigator';
 import AddWorkspace from '../screens/AddWorkspace';
 import ViewWorkspace from '../screens/ViewWorkspace';
 import AddCollection from '../screens/AddCollection';
@@ -24,8 +25,8 @@ export default () => {
         options={{ title: 'Add workspace' }}
       />
       <RootStack.Screen
-        name="ViewWorkspace"
-        component={ViewWorkspace}
+        name="Workspace"
+        component={WorkspaceNavigator}
       />
       <RootStack.Screen
         name="AddCollection"

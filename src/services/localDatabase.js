@@ -3,6 +3,7 @@ import LocalStorage from 'lowdb/adapters/LocalStorage';
 import Base from 'lowdb/adapters/Base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
+import * as data from '../data';
 
 //AsyncStorage.clear();
 
@@ -45,18 +46,29 @@ const db = (name, defaultValue) => {
 export const appDb = () => {
   return db(
     'nexusbase',
-    { workspaces: [], lastWorkspace: null }
+    {
+      workspaces: [
+        {
+          id: '9VxN5dbt8',
+          name: 'My Workspace'
+        }
+      ],
+      lastWorkspace: '9VxN5dbt8'
+    }
   );
 }
 
 export const workspaceDb = (WorkspaceId) => {
   return db(
     WorkspaceId,
+    data.demoWorkspaceDb
+    /*
     {
       workspace: {},
       collections: [],
       views: [],
       items: [],
     }
+    //*/
   );
 }

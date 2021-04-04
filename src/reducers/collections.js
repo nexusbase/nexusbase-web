@@ -4,19 +4,19 @@ export const initialState = {
   isFetchingList: false,
   isCreating: false,
   newId: null,
-  workspaces: [],
-  workspace: null,
+  collections: [],
+  collection: null,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case 'CREATE_WORKSPACE_START': {
+    case 'CREATE_COLLECTION_START': {
       return {
         ...state,
         isCreating: true,
       };
     }
-    case 'CREATE_WORKSPACE_SUCCESS': {
+    case 'CREATE_COLLECTION_SUCCESS': {
       return {
         ...state,
         isCreating: false,
@@ -24,46 +24,46 @@ export default (state = initialState, action) => {
       };
     }
 
-    case 'GET_WORKSPACES_START': {
+    case 'GET_COLLECTIONS_START': {
       return {
         ...state,
         isFetchingList: true,
       };
     }
-    case 'GET_WORKSPACES_SUCCESS': {
+    case 'GET_COLLECTIONS_SUCCESS': {
       return {
         ...state,
-        workspaces: action.payload,
+        collections: action.payload,
         isFetchingList: false,
       };
     }
 
-    case 'GET_WORKSPACE_START': {
+    case 'GET_COLLECTION_START': {
       return {
         ...state,
         isFetchingOne: true,
         newId: null,
       };
     }
-    case 'GET_WORKSPACE_SUCCESS': {
+    case 'GET_COLLECTION_SUCCESS': {
       return {
         ...state,
-        workspace: action.payload,
+        collection: action.payload,
         isFetchingOne: false,
       };
     }
 
-    case 'CLEAR_WORKSPACES': {
+    case 'CLEAR_COLLECTIONS': {
       return {
         ...state,
-        workspaces: [],
+        collections: [],
       };
     }
 
-    case 'CLEAR_WORKSPACE': {
+    case 'CLEAR_COLLECTION': {
       return {
         ...state,
-        workspace: null,
+        collection: null,
       };
     }
 

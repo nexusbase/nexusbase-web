@@ -29,7 +29,10 @@ export default ({ navigation }) => {
       if (workspaces.length === 0) {
         navigation.replace('Intro');
       } else {
-        navigation.replace('ViewWorkspace', {id: lastWorkspace})
+        navigation.replace('Workspace', {
+          screen: 'ViewWorkspace',
+          params: {id: lastWorkspace}
+        });
       }
     }
   }, [dataLoaded]);

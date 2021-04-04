@@ -1,4 +1,5 @@
 import { takeLatest, call, put} from 'redux-saga/effects';
+import { throwIfDev } from '../utils';
 import { appDb } from '../services/localDatabase'
 import { getWorkspacesSuccess } from '../actions/workspaces';
 import { getAppDataFailed, getAppDataSuccess } from '../actions/app';
@@ -11,7 +12,7 @@ export function* fetchAppData() {
     yield put(getAppDataSuccess(appData.lastWorkspace));
     //const payload
   } catch (e) {
-    console.log(e)
+    throwIfDev(e);
     yield put(getAppDataFailed());
   }
 }
