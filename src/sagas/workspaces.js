@@ -1,18 +1,18 @@
 import { takeLatest, call, put} from 'redux-saga/effects';
 import { throwIfDev } from '../utils';
 import { appDb, workspaceDb } from '../services/localDatabase';
+import { generateId } from '../utils';
 import {
   createWorkspaceSuccess,
   getWorkspaceSuccess
 } from '../actions/workspaces';
-import { generateId } from '../utils';
+import { lastVisited } from '../actions/app';
 
 function* createWorkspaceSaga({ payload }) {
   try {
     const mainDB = yield call(appDb);
     const workspace = { id: generateId('w'), ...payload };
     mainDB.get('workspaces').push(workspace).write();
-    mainDB.set('lastWorkspace', workspace.id).write();
     const db = yield call(workspaceDb, workspace.id);
     db.set('workspace', workspace).write();
     yield put(createWorkspaceSuccess(workspace.id));
@@ -28,6 +28,7 @@ function* getWorkspaceSaga({ payload }) {
     const db = yield call(workspaceDb, payload);
     const workspace = db.get('workspace').value();
     yield put(getWorkspaceSuccess(workspace));
+    yield put(lastVisited({ workspace: workspace.id }));
 
   } catch (e) {
     throwIfDev(e);

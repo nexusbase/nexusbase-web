@@ -6,6 +6,7 @@ import { ApplicationProvider as KittenAppProvider, IconRegistry } from '@ui-kitt
 import { Provider as ReduxProvider } from 'react-redux';
 import RootNavigator from './navigators/RootNavigator';
 import store from '../services/reduxStore';
+import { DrawerContentScrollView } from '@react-navigation/drawer';
 
 export default () => {
   return (

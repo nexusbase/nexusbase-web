@@ -1,6 +1,7 @@
 import { takeLatest, call, put, select, takeEvery} from 'redux-saga/effects';
 import { throwIfDev } from '../utils';
 import { appDb, workspaceDb } from '../services/localDatabase';
+import { setLastVisitedStart } from '../actions/app';
 import CollectionModel from "../models/CollectionModel";
 import { createCollectionSuccess, getCollectionsSuccess, getCollectionSuccess } from "../actions/collections";
 
@@ -38,6 +39,7 @@ function* getCollectionSaga({ payload }) {
     const collectionModel = new CollectionModel(db);
     const collection = collectionModel.find(payload);
     yield put(getCollectionSuccess(collection));
+    yield put(setLastVisitedStart({ collection: collection.id }));
 
   } catch (e) {
     throwIfDev(e);
@@ -46,7 +48,7 @@ function* getCollectionSaga({ payload }) {
 }
 
 export default function* () {
-  yield takeEvery('CREATE_COLLECTION_START', createCollectionSaga);
-  yield takeEvery('GET_COLLECTIONS_START', getCollectionsSaga);
-  yield takeEvery('GET_COLLECTION_START', getCollectionSaga);
+  yield takeLatest('CREATE_COLLECTION_START', createCollectionSaga);
+  yield takeLatest('GET_COLLECTIONS_START', getCollectionsSaga);
+  yield takeLatest('GET_COLLECTION_START', getCollectionSaga);
 }

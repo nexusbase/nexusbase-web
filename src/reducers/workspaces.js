@@ -4,7 +4,7 @@ export const initialState = {
   isFetchingList: false,
   isCreating: false,
   newId: null,
-  workspaces: [],
+  workspaces: null,// []
   workspace: null,
 };
 

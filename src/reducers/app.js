@@ -2,7 +2,8 @@
 export const initialState = {
   dataLoaded: false,
   isLoadingAppData: false,
-  lastWorkspace: "",
+  lastWorkspace: null,
+  lastCollection: null,
 };
 
 export default (state = initialState, action) => {
@@ -23,12 +24,25 @@ export default (state = initialState, action) => {
     }
 
     case 'GET_APP_DATA_SUCCESS': {
-      const { lastWorkspace } = action.payload;
+      const { lastWorkspace, lastCollection } = action.payload;
       return {
         ...state,
         dataLoaded: true,
         isLoadingAppData: false,
         lastWorkspace,
+        lastCollection,
+      }
+    }
+
+    case 'SET_LAST_VISITED_START': {
+      return state;
+    }
+    
+    case 'SET_LAST_VISITED_SUCCESS': {
+      return {
+        ...state,
+        lastWorkspace: action.payload.workspace || state.lastWorkspace,
+        lastCollection: action.payload.collection || state.lastCollection,
       }
     }
 

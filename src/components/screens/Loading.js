@@ -11,13 +11,18 @@ import ScreenSafeAreaView from '../ScreenSafeAreaView';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAppDataStart } from '../../actions/app';
+import { getWorkspaceStart } from '../../actions/workspaces';
+import { getCollectionsStart } from '../../actions/collections';
 
 export default ({ navigation }) => {
   const dispatch = useDispatch();
-  const { dataLoaded, lastWorkspace, workspaces } = useSelector((state) => ({
+  const { dataLoaded, lastWorkspace, lastCollection, workspaces, workspace, collections } = useSelector((state) => ({
     dataLoaded: state.app.dataLoaded,
     lastWorkspace: state.app.lastWorkspace,
+    lastCollection: state.app.lastCollection,
     workspaces: state.workspaces.workspaces,
+    workspace: state.workspaces.workspace,
+    collections: state.collections.collections,
   }));
 
   useEffect(() => {
@@ -25,17 +30,37 @@ export default ({ navigation }) => {
   }, [])
 
   useEffect(() => {
-    if (dataLoaded) {
-      if (workspaces.length === 0) {
-        navigation.replace('Intro');
-      } else {
+    if (!dataLoaded) return;
+    
+    if (workspaces.length === 0) {
+      navigation.replace('Intro');
+      return;
+    }
+    
+    if (!lastCollection) {
+      if (lastWorkspace) {
         navigation.replace('Workspace', {
           screen: 'ViewWorkspace',
           params: {id: lastWorkspace}
         });
       }
+      return;
     }
-  }, [dataLoaded]);
+
+    if (workspace && collections) {
+      navigation.replace('Workspace', {
+        screen: 'ViewCollection',
+        params: {id: lastCollection}
+      });
+    } else {
+      // fetch workspace and collections data
+      if (workspace) {
+        dispatch(getCollectionsStart());
+      } else {
+        dispatch(getWorkspaceStart(lastWorkspace));
+      }
+    }
+  }, [dataLoaded, workspace, collections]);
 
   return (
     <ScreenSafeAreaView>

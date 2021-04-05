@@ -7,26 +7,30 @@ import {
   Text,
 } from '@ui-kitten/components';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
-import { getCollectionStart } from '../../actions/collections';
 import { useIsFocused } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
+import { getWorkspaceStart } from '../../actions/workspaces';
+import { getCollectionStart } from '../../actions/collections';
 
 export default ({ navigation, route }) => {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
   const collectionId = route.params.id;
-  const { workspace, collection } = useSelector((state) => ({
+  const { workspace, collection, lastWorkspace } = useSelector((state) => ({
     workspace: state.workspaces.workspace,
     collection: state.collections.collection,
+    lastWorkspace: state.app.lastWorkspace
   }));
 
   useEffect(() => {
     if (isFocused) {
-      // todo load workspace data if not loaded
-      console.log({collectionId})
-      dispatch(getCollectionStart(collectionId));
+      if (workspace) {
+        dispatch(getCollectionStart(collectionId));
+      } else {
+        dispatch(getWorkspaceStart(lastWorkspace));
+      }
     }
-  }, [collectionId, isFocused]);
+  }, [collectionId, isFocused, workspace]);
 
   if (!collection) {
     return (
@@ -57,11 +61,8 @@ export default ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   text: {
-    textAlign: 'center',
   },
   likeButton: {
     marginVertical: 16,
