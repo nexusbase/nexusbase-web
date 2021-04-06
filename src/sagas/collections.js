@@ -1,6 +1,6 @@
-import { takeLatest, call, put, select, takeEvery} from 'redux-saga/effects';
+import { takeLatest, call, put, select} from 'redux-saga/effects';
 import { throwIfDev } from '../utils';
-import { appDb, workspaceDb } from '../services/localDatabase';
+import { workspaceDb } from '../services/localDatabase';
 import { setLastVisitedStart } from '../actions/app';
 import CollectionModel from "../models/CollectionModel";
 import { createCollectionSuccess, getCollectionsSuccess, getCollectionSuccess } from "../actions/collections";

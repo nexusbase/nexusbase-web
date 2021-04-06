@@ -15,7 +15,6 @@ export function* fetchAppData() {
         lastCollection: appData.lastCollection,
       }
     ));
-    //const payload
   } catch (e) {
     throwIfDev(e);
     yield put(getAppDataFailed());
@@ -28,7 +27,6 @@ export function* setLastVisitedSaga({ payload: { workspace, collection } }) {
     if (workspace) mainDB.set('lastWorkspace', workspace).write();
     if (collection) mainDB.set('lastCollection', collection).write();
     yield put(setLastVisitedSuccess(payload));
-    //const payload
   } catch (e) {
     throwIfDev(e);
     yield put(getAppDataFailed());

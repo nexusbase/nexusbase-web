@@ -17,15 +17,20 @@ const WorkspaceDrawerContent = ({ navigation, state }) => {
     let routes = [
       {
         name: 'ViewWorkspace',
-        title: 'Workspace Home',
+        params: {id: workspace.id},
+        data: {
+          title: 'Workspace Home',
+        },
       }
     ];
 
     for (const collection of collections) {
       routes.push({
         name: 'ViewCollection',
-        title: collection.name,
         params: {id: collection.id},
+        data: {
+          title: collection.name,
+        },
       });
     }
 
@@ -36,7 +41,7 @@ const WorkspaceDrawerContent = ({ navigation, state }) => {
     return (
       <DrawerItem
         key={index}
-        title={route.title}
+        title={route.data.title}
       />
     );
   };
