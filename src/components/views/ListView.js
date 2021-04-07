@@ -1,13 +1,7 @@
-import React, { useEffect } from 'react';
-import { StyleSheet, ScrollView, View } from 'react-native';
-import {
-  Button,
-  Icon,
-  Layout,
-  Text,
-  Spinner,
-} from '@ui-kitten/components';
-import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
+import React, {useEffect} from 'react';
+import {StyleSheet, ScrollView, View} from 'react-native';
+import {Button, Spinner} from '@ui-kitten/components';
+import {Table, Row} from 'react-native-table-component';
 import PropWidget from '../PropWidget';
 import PropFactory from '../factories/PropFactory';
 
@@ -41,7 +35,7 @@ export default ({ view, collection, items }) => {
 
   return (
     <ScrollView horizontal={true}>
-      <View>
+      <View style={styles.scrollViewHorizontal}>
         <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
           <Row
             data={headerRow()}
@@ -49,7 +43,7 @@ export default ({ view, collection, items }) => {
           />
         </Table>
         <ScrollView>
-          <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+          <Table>
             {items ?
               Array(60).fill(items[0]).map(item =>
                 <Row
@@ -70,7 +64,7 @@ export default ({ view, collection, items }) => {
 
 const styles = StyleSheet.create({
   scrollViewHorizontal: {
-    marginLeft: 50
+    marginLeft: 30
   },
   text: {
   },

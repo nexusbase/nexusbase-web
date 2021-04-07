@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Drawer, DrawerItem, Icon } from '@ui-kitten/components';
 import ViewWorkspace from '../screens/ViewWorkspace';
 import ViewCollection from '../screens/ViewCollection';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCollectionsStart } from '../../actions/collections';
 
 const WorkspaceDrawer = createDrawerNavigator();
 
 const WorkspaceDrawerContent = ({ navigation, state }) => {
+  const dispatch = useDispatch();
   const { workspace, collections } = useSelector((state) => ({
     workspace: state.workspaces.workspace,
     collections: state.collections.collections,
   }));
+
+  useEffect(() => {
+    if (!collections) {
+      dispatch(getCollectionsStart());
+    }
+  }, [workspace, collections]);
 
   const getRoutes = () => {
     if (!workspace || !collections) {

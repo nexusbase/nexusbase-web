@@ -21,11 +21,7 @@ export default ({ navigation }) => {
     collections: state.collections.collections,
   }));
 
-  useEffect(() => {
-    dispatch(getAppDataStart());
-  }, [])
-
-  useEffect(() => {
+  const nextScreen = () => {
     if (!dataLoaded) return;
     
     if (workspaces.length === 0) {
@@ -51,6 +47,14 @@ export default ({ navigation }) => {
     } else {
       dispatch(getWorkspaceStart(lastWorkspace));
     }
+  };
+
+  useEffect(() => {
+    dispatch(getAppDataStart());
+  }, [])
+
+  useEffect(() => {
+    nextScreen();
   }, [dataLoaded, workspace, collections]);
 
   return (
