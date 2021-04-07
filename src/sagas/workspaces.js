@@ -6,7 +6,7 @@ import {
   createWorkspaceSuccess,
   getWorkspaceSuccess
 } from '../actions/workspaces';
-import { lastVisited } from '../actions/app';
+import { setLastVisitedStart } from '../actions/app';
 
 function* createWorkspaceSaga({ payload }) {
   try {
@@ -28,7 +28,7 @@ function* getWorkspaceSaga({ payload }) {
     const db = yield call(workspaceDb, payload);
     const workspace = db.get('workspace').value();
     yield put(getWorkspaceSuccess(workspace));
-    yield put(lastVisited({ workspace: workspace.id }));
+    yield put(setLastVisitedStart({ workspace: workspace.id }));
 
   } catch (e) {
     throwIfDev(e);

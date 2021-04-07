@@ -4,7 +4,6 @@ import Loading from '../screens/Loading';
 import Intro from '../screens/Intro';
 import WorkspaceNavigator from './WorkspaceNavigator';
 import AddWorkspace from '../screens/AddWorkspace';
-import ViewWorkspace from '../screens/ViewWorkspace';
 import AddCollection from '../screens/AddCollection';
 
 export default () => {

@@ -1,3 +1,1 @@
-export default {
-  throwCaught: true
-}
+export const throwCaught = true;

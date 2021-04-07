@@ -1,8 +1,8 @@
 import { takeLatest, call, put, select} from 'redux-saga/effects';
 import { throwIfDev } from '../utils';
 import { workspaceDb } from '../services/localDatabase';
-import { setLastVisitedStart } from '../actions/app';
 import CollectionModel from "../models/CollectionModel";
+import { setLastVisitedStart } from '../actions/app';
 import { createCollectionSuccess, getCollectionsSuccess, getCollectionSuccess } from "../actions/collections";
 
 function* createCollectionSaga({ payload }) {

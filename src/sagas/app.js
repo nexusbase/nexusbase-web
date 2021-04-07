@@ -21,8 +21,9 @@ export function* fetchAppData() {
   }
 }
 
-export function* setLastVisitedSaga({ payload: { workspace, collection } }) {
+export function* setLastVisitedSaga({ payload }) {
   try {
+    const { workspace, collection } = payload;
     const mainDB = yield call(appDb);
     if (workspace) mainDB.set('lastWorkspace', workspace).write();
     if (collection) mainDB.set('lastCollection', collection).write();

@@ -14,6 +14,17 @@ const WorkspaceDrawerContent = ({ navigation, state }) => {
   }));
 
   const getRoutes = () => {
+    if (!workspace || !collections) {
+      return [
+        {
+          name: 'ViewWorkspace',
+          data: {
+            title: 'Workspace Home',
+          },
+        }
+      ];
+    }
+
     let routes = [
       {
         name: 'ViewWorkspace',

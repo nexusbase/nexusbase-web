@@ -3,11 +3,9 @@ import { StyleSheet, View } from 'react-native';
 import {
   Button,
   Icon,
-  Input,
   Layout,
   List,
   ListItem,
-  Spinner,
   Text,
 } from '@ui-kitten/components';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
@@ -28,8 +26,11 @@ export default ({ navigation, route }) => {
 
   useEffect(() => {
     if (isFocused) {
-      dispatch(getWorkspaceStart(workspaceId));
-      if (workspace) dispatch(getCollectionsStart());
+      if (workspace) {
+        dispatch(getCollectionsStart());
+      } else {
+        dispatch(getWorkspaceStart(workspaceId));
+      }
     }
   }, [workspace, isFocused]);
 

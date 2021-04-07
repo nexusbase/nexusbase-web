@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   Button,
   Icon,
   Input,
   Layout,
-  Spinner,
   Text,
 } from '@ui-kitten/components';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';

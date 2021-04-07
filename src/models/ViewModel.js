@@ -38,7 +38,7 @@ export default class ViewModel extends BaseModel {
   }
 
   find(id) {
-    return db.find({ id }).value();
+    return this.db.get('views').find({ id }).value();
   }
 
   updateView(args) {

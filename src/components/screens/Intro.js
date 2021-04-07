@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import {
   Button,
-  Icon,
   Layout,
   Text,
 } from '@ui-kitten/components';
