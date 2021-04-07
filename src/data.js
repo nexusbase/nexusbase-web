@@ -11,14 +11,24 @@ export const demoWorkspaceDb = {
       workspaceId: "9VxN5dbt8",
       name: "People",
       description: "",
-      fields: [
+      props: [
         {
           id: "f1",
           type: "line",
-          label: "Title"
-        }
+          label: "Firstname"
+        },
+        {
+          id: "f2",
+          type: "line",
+          label: "Lastname"
+        },
+        {
+          id: "f3",
+          type: "line",
+          label: "Phone number"
+        },
       ],
-      titleField: "f1",
+      titleProp: "f1",
       defaultView: "Ui1VO-haWv",
       createdAt: 1591546431900,
       updatedAt: 1591546431900
@@ -30,9 +40,7 @@ export const demoWorkspaceDb = {
       collectionId: "j7mzSbVcb",
       name: "",
       type: "list",
-      fields: [
-        "f1"
-      ],
+      props: ["f1", "f2", "f3"],
       options: {
         groupBy: null
       },
@@ -44,8 +52,10 @@ export const demoWorkspaceDb = {
     {
       id: "CXJCQ_X6S",
       collectionId: "j7mzSbVcb",
-      fields: {
-        f1: "dwdwdwdwn"
+      props: {
+        f1: "SomeRandomName",
+        f2: "SomeRandomSurname",
+        f3: "0123456789"
       },
       createdAt: 1602788444644,
       updatedAt: 1602795923972

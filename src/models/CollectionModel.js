@@ -11,10 +11,10 @@ export default class CollectionModel extends BaseModel {
 
   relatedCollections(collection) {
     let related = [];
-    const relationFields = collection.fields.filter(field => field.type === 'relation');
+    const relationProps = collection.props.filter(prop => prop.type === 'relation');
       
-    if (relationFields.length > 0) {
-      const relatedCollectionIds = relationFields.map(field => field.options.collectionId);
+    if (relationProps.length > 0) {
+      const relatedCollectionIds = relationProps.map(prop => prop.options.collectionId);
       
       const relatedCollections = this.db.get('collections').filter(relatedCollection => {
         return relatedCollectionIds.includes(relatedCollection.id);
@@ -32,7 +32,7 @@ export default class CollectionModel extends BaseModel {
     const viewModel = new ViewModel(this.db);
     const view = viewModel.create({
       collectionId,
-      fields: ['f1'],
+      props: ['f1'],
       options: {
         groupBy: null
       }
@@ -44,14 +44,14 @@ export default class CollectionModel extends BaseModel {
       workspaceId,
       name,
       description,
-      fields: [
+      props: [
         {
           id: 'f1',
           type: 'line',
           label: 'Title'
         }
       ],
-      titleField: 'f1',
+      titleProp: 'f1',
       defaultView: view.id,
       createdAt: timestamp,
       updatedAt: timestamp
@@ -79,8 +79,8 @@ export default class CollectionModel extends BaseModel {
     };
   }
 
-  updateField(args) {
-    const { collectionId, fieldId, data: updatedField } = args;
+  updateProp(args) {
+    const { collectionId, propId, data: updatedProp } = args;
     const collectionRef = this.db.get('collections').find({ id: collectionId });
     let collection = collectionRef.value();
     
@@ -88,15 +88,15 @@ export default class CollectionModel extends BaseModel {
       throw new Error(`Collection not found: ${collectionId}`);
     }
 
-    const field = collection.fields.find(field => field.id === fieldId);
+    const prop = collection.props.find(prop => prop.id === propId);
 
-    if (!field) {
-      throw new Error(`Collection [${collectionId}] field not found [${fieldId}]`);
+    if (!prop) {
+      throw new Error(`Collection [${collectionId}] prop not found [${propId}]`);
     }
 
-    const fieldIndex = collection.fields.findIndex(field => field.id === fieldId);
+    const propIndex = collection.props.findIndex(prop => prop.id === propId);
     const timestamp = Date.now();
-    collection.fields[fieldIndex] = { ...updatedField, id: fieldId };
+    collection.props[propIndex] = { ...updatedProp, id: propId };
     collection.updatedAt = timestamp;
 
     collectionRef.assign(collection).write();

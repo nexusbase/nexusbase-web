@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text } from "@ui-kitten/components"
 
-export default ({ field }) => {
+export default ({ collectionProp }) => {
   return (
-    <Text>{field.label}</Text>
+    <Text>{collectionProp.label}</Text>
   )
 }

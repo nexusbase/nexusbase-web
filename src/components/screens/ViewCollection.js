@@ -62,12 +62,15 @@ export default ({ navigation, route }) => {
   return (
     <ScreenSafeAreaView>
       <Layout style={styles.container}>
-        <Text style={styles.text} category="h1">
-          {collection.name}
-        </Text>
-        <View>  
-          <ViewFactory />
+        <View style={styles.content}>
+          <Text style={styles.text} category="h1">
+            {collection.name}
+          </Text>
+          <View>  
+            <ViewFactory />
+          </View>
         </View>
+
       </Layout>
     </ScreenSafeAreaView>
   );
@@ -76,6 +79,9 @@ export default ({ navigation, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  content: {
+    marginLeft: 20
   },
   text: {
   },

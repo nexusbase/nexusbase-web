@@ -21,7 +21,7 @@ class ItemResolver extends BaseModel {
     const itemData = {
       id: itemId,
       collectionId,
-      fields: {},
+      props: {},
       createdAt: timestamp,
       updatedAt: timestamp
     };
@@ -94,7 +94,7 @@ class ItemResolver extends BaseModel {
     const itemData = {
       ...oldItem,
       collectionId: oldItem.collectionId,
-      fields: args.fields,
+      props: args.props,
       updatedAt: timestamp
     };
 
