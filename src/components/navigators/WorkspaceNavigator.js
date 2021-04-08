@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Drawer, DrawerItem, Icon } from '@ui-kitten/components';
-import ViewWorkspace from '../screens/ViewWorkspace';
-import ViewCollection from '../screens/ViewCollection';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCollectionsStart } from '../../actions/collections';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Drawer, DrawerItem, Icon } from '@ui-kitten/components';
+import ViewWorkspaceScreen from '../screens/ViewWorkspaceScreen';
+import ViewCollectionScreen from '../screens/ViewCollectionScreen';
 
 const WorkspaceDrawer = createDrawerNavigator();
 
@@ -79,13 +79,11 @@ export default function() {
     <WorkspaceDrawer.Navigator drawerContent={props => <WorkspaceDrawerContent {...props} />}>
       <WorkspaceDrawer.Screen
         name={'ViewWorkspace'}
-        component={ViewWorkspace}
-        options={{ title: 'Home', drawerIcon: <Icon name="star" /> }}
+        component={ViewWorkspaceScreen}
       />
       <WorkspaceDrawer.Screen
         name={'ViewCollection'}
-        component={ViewCollection}
-        options={{ title: 'Collection', drawerIcon: <Icon name="star" /> }}
+        component={ViewCollectionScreen}
       />
     </WorkspaceDrawer.Navigator>
   );

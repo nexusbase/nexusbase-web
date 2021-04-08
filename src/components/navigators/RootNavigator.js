@@ -1,27 +1,27 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Loading from '../screens/Loading';
-import Intro from '../screens/Intro';
+import LoadingScreen from '../screens/LoadingScreen';
+import IntroScreen from '../screens/IntroScreen';
 import WorkspaceNavigator from './WorkspaceNavigator';
-import AddWorkspace from '../screens/AddWorkspace';
-import AddCollection from '../screens/AddCollection';
+import AddWorkspaceScreen from '../screens/AddWorkspaceScreen';
+import AddCollectionScreen from '../screens/AddCollectionScreen';
+import ItemScreen from '../screens/ItemScreen';
 
 export default () => {
   const RootStack = createStackNavigator();
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator headerMode='none'>
       <RootStack.Screen
         name="Loading"
-        component={Loading}
+        component={LoadingScreen}
       />
       <RootStack.Screen
         name="Intro"
-        component={Intro}
+        component={IntroScreen}
       />
       <RootStack.Screen
         name="AddWorkspace"
-        component={AddWorkspace}
-        options={{ title: 'Add workspace' }}
+        component={AddWorkspaceScreen}
       />
       <RootStack.Screen
         name="Workspace"
@@ -29,8 +29,11 @@ export default () => {
       />
       <RootStack.Screen
         name="AddCollection"
-        component={AddCollection}
-        options={{ title: 'Add collection' }}
+        component={AddCollectionScreen}
+      />
+      <RootStack.Screen
+        name="ViewItem"
+        component={ItemScreen}
       />
     </RootStack.Navigator>
   );
