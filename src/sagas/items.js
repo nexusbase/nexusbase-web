@@ -2,7 +2,7 @@ import { takeLatest, call, put, select} from 'redux-saga/effects';
 import { throwIfDev } from '../utils';
 import { workspaceDb } from '../services/localDatabase';
 import ItemModel from "../models/ItemModel";
-import { createItemSuccess, getItemsSuccess, getItemSuccess } from "../actions/items";
+import { createItemSuccess, getItemsStart, getItemsSuccess, getItemSuccess, updateItemSuccess } from "../actions/items";
 
 function* createItemsSaga({ payload }) {
   try {
@@ -25,11 +25,9 @@ function* getItemsSaga() {
         collectionId: state.collections.collection.id,
       }
     ));
-    
     const db = yield call(workspaceDb, workspaceId);
     const itemModel = new ItemModel(db);
     const itemsData = itemModel.get({ collectionId });
-    console.log({saga: itemsData})
     yield put(getItemsSuccess(itemsData));
 
   } catch (e) {
@@ -44,7 +42,32 @@ function* getItemSaga({ payload }) {
     const db = yield call(workspaceDb, workspaceId);
     const itemModel = new ItemModel(db);
     const item = itemModel.find(payload);
-    yield put(getItemSuccess(item));
+    
+    if (item) {
+      yield put(getItemSuccess(item));
+    } else {
+      // yeild put(/* not found error */)
+    }
+
+  } catch (e) {
+    throwIfDev(e);
+    //yield put(getAppDataFailed());
+  }
+}
+
+function* updateItemSaga({ payload }) {
+  try {
+    const workspaceId = yield select(state => state.workspaces.workspace.id);
+    const db = yield call(workspaceDb, workspaceId);
+    const itemModel = new ItemModel(db);
+    const item = itemModel.update(payload.id, payload.props);
+    
+    if (item) {
+      yield put(updateItemSuccess(item));
+      yield put(getItemsStart(item.collectionId));
+    } else {
+      // yeild put(/* not found error */)
+    }
 
   } catch (e) {
     throwIfDev(e);
@@ -56,4 +79,5 @@ export default function* () {
   yield takeLatest('CREATE_ITEMS_START', createItemsSaga);
   yield takeLatest('GET_ITEMS_START', getItemsSaga);
   yield takeLatest('GET_ITEM_START', getItemSaga);
+  yield takeLatest('UPDATE_ITEM_START', updateItemSaga);
 }

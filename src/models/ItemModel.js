@@ -1,6 +1,6 @@
 import BaseModel from './BaseModel';
 
-class ItemResolver extends BaseModel {
+export default class ItemModel extends BaseModel {
   constructor(db) {
     super({
       db,
@@ -37,7 +37,6 @@ class ItemResolver extends BaseModel {
   }
 
   get(args) {
-    console.log({args})
     const { collectionId } = args;
     let items = this.db.get('items');
     let related;
@@ -56,51 +55,27 @@ class ItemResolver extends BaseModel {
     };
   }
 
-  find(args) {
-    const item = this.db.get('items').find({ id: args.id }).value();
-
-    if (!item) {
-      throw new Error(`Item not found: ${args.id}`);
-    }
-
-    const collection = this.db.get('collections').find({ id: item.collectionId }).value();
-
-    if (!collection) {
-      throw new Error(`Collection not found: ${item.collectionId}`);
-    }
-
-    return {
-      ...item,
-      collection
-    };
+  find(id) {
+    return item = this.db.get('items').find({ id }).value();
   }
 
-  update(args) {
-    const { collectionId } = args;
-    const collection = this.db.get('collections').find({ id: collectionId }).value();
-    
-    if (!collection) {
-      throw new Error(`Collection not found: ${args.collectionId}`);
-    }
-
-    const item = this.db.get('items').find({ id: args.id });
+  update(id, props) {
+    const item = this.db.get('items').find({ id });
     const oldItem = item.value();
 
     if (!oldItem) {
-      throw new Error(`Item not found: ${args.id}`);
+      throw new Error(`Item not found: ${id}`);
     }
 
-    const timestamp = this.timestamp(); 
     const itemData = {
       ...oldItem,
-      collectionId: oldItem.collectionId,
-      props: args.props,
-      updatedAt: timestamp
+      props: {...oldItem.props, ...props},
+      updatedAt: Date.now()
     };
 
     item.assign(itemData).write();
 
-    return this.db.get('items').find({ id: args.id }).value();
+    return this.db.get('items').find({ id }).value();
   }
 
   delete(args) {
@@ -115,5 +90,3 @@ class ItemResolver extends BaseModel {
     return this.db.get('items').find({ id: args.id }).value();
   }
 }
-
-export default ItemResolver;

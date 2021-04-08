@@ -28,3 +28,12 @@ export const getItemsSuccess = (payload) => ({
   type: 'GET_ITEMS_SUCCESS',
   payload
 });
+
+export const updateItemStart = (payload) => ({
+  type: 'UPDATE_ITEM_START',
+  payload
+});
+
+export const updateItemSuccess = (payload) => ({
+  type: 'UPDATE_ITEM_SUCCESS'
+});
