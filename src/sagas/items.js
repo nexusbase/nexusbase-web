@@ -2,7 +2,7 @@ import { takeLatest, call, put, select} from 'redux-saga/effects';
 import { throwIfDev } from '../utils';
 import { workspaceDb } from '../services/localDatabase';
 import ItemModel from "../models/ItemModel";
-import { createItemSuccess, getItemsStart, getItemsSuccess, getItemSuccess, updateItemSuccess } from "../actions/items";
+import { createItemSuccess, getItemsSuccess, getFormItemSuccess, updateItemSuccess } from "../actions/items";
 
 function* createItemsSaga({ payload }) {
   try {
@@ -36,7 +36,7 @@ function* getItemsSaga() {
   }
 }
 
-function* getItemSaga({ payload }) {
+function* getFormItemSaga({ payload }) {
   try {
     const workspaceId = yield select(state => state.workspaces.workspace.id);
     const db = yield call(workspaceDb, workspaceId);
@@ -44,7 +44,7 @@ function* getItemSaga({ payload }) {
     const item = itemModel.find(payload);
     
     if (item) {
-      yield put(getItemSuccess(item));
+      yield put(getFormItemSuccess(item));
     } else {
       // yeild put(/* not found error */)
     }
@@ -64,7 +64,6 @@ function* updateItemSaga({ payload }) {
     
     if (item) {
       yield put(updateItemSuccess(item));
-      yield put(getItemsStart(item.collectionId));
     } else {
       // yeild put(/* not found error */)
     }
@@ -78,6 +77,6 @@ function* updateItemSaga({ payload }) {
 export default function* () {
   yield takeLatest('CREATE_ITEMS_START', createItemsSaga);
   yield takeLatest('GET_ITEMS_START', getItemsSaga);
-  yield takeLatest('GET_ITEM_START', getItemSaga);
+  yield takeLatest('GET_FORM_ITEM_START', getFormItemSaga);
   yield takeLatest('UPDATE_ITEM_START', updateItemSaga);
 }

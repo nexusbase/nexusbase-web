@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useIsFocused, useNavigation } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { getItemStart, clearItem } from '../../actions/items';
+import { getFormItemStart, clearFormItem } from '../../actions/items';
 import { StyleSheet, View } from 'react-native';
 import {
   Icon,
@@ -75,19 +75,18 @@ function Navigation() {
 export default ({ navigation, route }) => {
   const dispatch = useDispatch();
   const isFocused = useIsFocused();
-  const [modified, setModified] = useState(false);
   const itemId = route.params.id;
   const { collections, item } = useSelector((state) => ({
     collections: state.collections.collections,
-    item: state.items.item,
+    item: state.items.form[itemId],
   }));
 
   useEffect(() => {
     if(isFocused) {
-      dispatch(getItemStart(itemId));
+      dispatch(getFormItemStart(itemId));
     }
 
-    return () => dispatch(clearItem())
+    return () => dispatch(clearFormItem(itemId))
   }, [isFocused]);
   
   if (!item) {
@@ -108,7 +107,7 @@ export default ({ navigation, route }) => {
     <ScreenSafeAreaView>
       <Navigation />
       <Layout style={styles.container}>
-        <ItemForm collectionProps={collection.props} item={item} setModified={setModified} />
+        <ItemForm collectionProps={collection.props} item={item} />
       </Layout>
     </ScreenSafeAreaView>
   );

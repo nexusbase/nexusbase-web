@@ -13,8 +13,16 @@ export default () => {
   }));
 
   const openItem = (itemId) => {
-    navigation.navigate('ViewItem', {id: itemId});
+    navigation.push('ViewItem', {id: itemId});
   }
+
+  /* dev: go straight to item
+  useEffect(() => {
+    if (items) {
+       openItem(items[0].id);
+    }
+  }, [items]);
+  //*/
 
   if (!view) {
     return <Spinner />

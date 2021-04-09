@@ -9,13 +9,13 @@ export const createItemSuccess = (payload) => ({
   payload
 });
 
-export const getItemStart = (payload) => ({
-  type: 'GET_ITEM_START',
+export const getFormItemStart = (payload) => ({
+  type: 'GET_FORM_ITEM_START',
   payload
 });
 
-export const getItemSuccess = (payload) => ({
-  type: 'GET_ITEM_SUCCESS',
+export const getFormItemSuccess = (payload) => ({
+  type: 'GET_FORM_ITEM_SUCCESS',
   payload
 });
 
@@ -38,6 +38,7 @@ export const updateItemSuccess = (payload) => ({
   type: 'UPDATE_ITEM_SUCCESS'
 });
 
-export const clearItem = (payload) => ({
-  type: 'CLEAR_ITEM'
+export const clearFormItem = (payload) => ({
+  type: 'CLEAR_FORM_ITEM',
+  payload
 });

@@ -7,6 +7,7 @@ export const initialState = {
   items: null,// []
   related: null,// []
   item: null,
+  form: {},
 };
 
 export default (state = initialState, action) => {
@@ -55,17 +56,39 @@ export default (state = initialState, action) => {
       };
     }
 
+    case 'GET_FORM_ITEM_START': {
+      return {
+        ...state,
+        isFetchingOne: true,
+        newId: null,
+      };
+    }
+    case 'GET_FORM_ITEM_SUCCESS': {
+      const form = {
+        ...state.form,
+        [action.payload.id]: action.payload,
+      };
+
+      return {
+        ...state,
+        form,
+        isFetchingOne: false,
+      };
+    }
+    
     case 'CLEAR_ITEMS': {
       return {
         ...state,
         items: [],
       };
     }
-
-    case 'CLEAR_ITEM': {
+    
+    case 'CLEAR_FORM_ITEM': {
+      let form = state.form;
+      delete form[action.payload];
       return {
         ...state,
-        item: null,
+        form,
       };
     }
 
