@@ -1,12 +1,9 @@
-import React, {useEffect} from 'react';
-import {StyleSheet, ScrollView, View} from 'react-native';
-import {Button, Divider, List, ListItem, Spinner} from '@ui-kitten/components';
-import {Table, Row} from 'react-native-table-component';
-import PropWidget from '../PropWidget';
-import PropFactory from '../factories/PropFactory';
+import React from 'react';
+import {StyleSheet} from 'react-native';
+import {Divider, List, ListItem} from '@ui-kitten/components';
 
 export default ({ view, collection, items, openItem }) => {
-  const renderItem = ({ item, index }) => (
+  const renderItem = ({ item }) => (
     <ListItem
       title={item.props[collection.titleProp]}
       onPress={() => openItem(item.id)}
@@ -14,12 +11,15 @@ export default ({ view, collection, items, openItem }) => {
   );
 
   return (
-    <List
-      style={styles.container}
-      data={items}
-      ItemSeparatorComponent={Divider}
-      renderItem={renderItem}
-    />
+    <>
+      <Divider />
+      <List
+        style={styles.container}
+        data={items}
+        ItemSeparatorComponent={Divider}
+        renderItem={renderItem}
+      />
+    </>
   );
 }
 
