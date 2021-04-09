@@ -9,7 +9,7 @@ import {
 } from '@ui-kitten/components';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
 import { useDispatch, useSelector } from 'react-redux';
-import { createWorkspaceStart } from '../../actions/workspaces';
+import { createWorkspaceStart } from '../../actions/workspaceActions';
 
 const StarIcon = (props) => (
   <Icon {...props} name='star'/>
@@ -19,7 +19,7 @@ export default ({ navigation }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const { newId, workspace } = useSelector((state) => ({
-    newId: state.workspaces.newId,
+    newId: state.workspace.newId,
   }));
   
   useEffect(() => {

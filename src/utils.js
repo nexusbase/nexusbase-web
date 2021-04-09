@@ -10,3 +10,7 @@ export function generateId(firstChar) {
   const nanoid = customAlphabet('abcdefghijklmnopqrstuvwxyz', 4)
   return firstChar + nanoid() + Date.now();
 }
+
+export function getPropertyFromCollection(propId, collection) {
+  return collection.properties.find(prop => prop.id === propId);
+}

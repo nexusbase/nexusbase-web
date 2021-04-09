@@ -2,8 +2,8 @@ import { takeLatest, call, put, select} from 'redux-saga/effects';
 import { throwIfDev } from '../utils';
 import { workspaceDb } from '../services/localDatabase';
 import CollectionModel from "../models/CollectionModel";
-import { setLastVisitedStart } from '../actions/app';
-import { createCollectionSuccess, getCollectionsSuccess, getCollectionSuccess } from "../actions/collections";
+import { setLastVisitedStart } from '../actions/appActions';
+import { createCollectionSuccess, getCollectionsSuccess, getCollectionSuccess } from "../actions/collectionActions";
 
 function* createCollectionSaga({ payload }) {
   try {
@@ -20,7 +20,7 @@ function* createCollectionSaga({ payload }) {
 
 function* getCollectionsSaga() {
   try {
-    const workspaceId = yield select(state => state.workspaces.workspace.id);
+    const workspaceId = yield select(state => state.workspace.workspace.id);
     const db = yield call(workspaceDb, workspaceId);
     const collectionModel = new CollectionModel(db);
     const collections = collectionModel.get(workspaceId);
@@ -34,7 +34,7 @@ function* getCollectionsSaga() {
 
 function* getCollectionSaga({ payload }) {
   try {
-    const workspaceId = yield select(state => state.workspaces.workspace.id);
+    const workspaceId = yield select(state => state.workspace.workspace.id);
     const db = yield call(workspaceDb, workspaceId);
     const collectionModel = new CollectionModel(db);
     const collection = collectionModel.find(payload);

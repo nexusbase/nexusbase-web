@@ -7,8 +7,8 @@ import {
 } from '@ui-kitten/components';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAppDataStart } from '../../actions/app';
-import { getWorkspaceStart } from '../../actions/workspaces';
+import { getAppDataStart } from '../../actions/appActions';
+import { getWorkspaceStart } from '../../actions/workspaceActions';
 
 export default ({ navigation }) => {
   const dispatch = useDispatch();
@@ -16,8 +16,8 @@ export default ({ navigation }) => {
     dataLoaded: state.app.dataLoaded,
     lastWorkspace: state.app.lastWorkspace,
     lastCollection: state.app.lastCollection,
-    workspaces: state.workspaces.workspaces,
-    workspace: state.workspaces.workspace,
+    workspaces: state.workspace.workspaces,
+    workspace: state.workspace.workspace,
   }));
 
   const nextScreen = () => {

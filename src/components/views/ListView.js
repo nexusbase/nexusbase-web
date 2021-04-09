@@ -5,7 +5,7 @@ import {Divider, List, ListItem} from '@ui-kitten/components';
 export default ({ view, collection, items, openItem }) => {
   const renderItem = ({ item }) => (
     <ListItem
-      title={item.props[collection.titleProp]}
+      title={item.properties[collection.titleProperty]}
       onPress={() => openItem(item.id)}
     />
   );

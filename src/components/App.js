@@ -4,7 +4,7 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider as KittenAppProvider, IconRegistry } from '@ui-kitten/components';
 import { Provider as ReduxProvider } from 'react-redux';
-import RootNavigator from './navigators/RootNavigator';
+import RootStackNavigator from './navigators/RootStackNavigator';
 import store from '../services/reduxStore';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 
@@ -15,7 +15,7 @@ export default () => {
       <KittenAppProvider {...eva} theme={eva.light}>
         <ReduxProvider store={store}>
           <NavigationContainer>
-            <RootNavigator />
+            <RootStackNavigator />
           </NavigationContainer>
         </ReduxProvider>
       </KittenAppProvider>

@@ -1,9 +1,9 @@
 import { takeLatest, call, put, select} from 'redux-saga/effects';
 import { throwIfDev } from '../utils';
 import { workspaceDb } from '../services/localDatabase';
-import { setLastVisitedStart } from '../actions/app';
+import { setLastVisitedStart } from '../actions/appActions';
 import ViewModel from "../models/ViewModel";
-import { createViewSuccess, getViewsSuccess, getViewSuccess } from "../actions/views";
+import { createViewSuccess, getViewsSuccess, getViewSuccess } from "../actions/viewActions";
 
 function* createViewSaga({ payload }) {
   try {
@@ -22,8 +22,8 @@ function* getViewsSaga() {
   try {
     const { workspaceId, collectionId } = yield select(state => (
       {
-        workspaceId: state.workspaces.workspace.id,
-        collectionId: state.collections.collection.id,
+        workspaceId: state.workspace.workspace.id,
+        collectionId: state.collection.collection.id,
       }
     ));
     const db = yield call(workspaceDb, workspaceId);
@@ -39,7 +39,7 @@ function* getViewsSaga() {
 
 function* getViewSaga({ payload }) {
   try {
-    const workspaceId = yield select(state => state.workspaces.workspace.id);
+    const workspaceId = yield select(state => state.workspace.workspace.id);
     const db = yield call(workspaceDb, workspaceId);
     const viewModel = new ViewModel(db);
     const view = viewModel.find(payload);

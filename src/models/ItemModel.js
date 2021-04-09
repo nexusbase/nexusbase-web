@@ -21,7 +21,7 @@ export default class ItemModel extends BaseModel {
     const itemData = {
       id: itemId,
       collectionId,
-      props: {},
+      properties: {},
       createdAt: timestamp,
       updatedAt: timestamp
     };
@@ -59,7 +59,7 @@ export default class ItemModel extends BaseModel {
     return item = this.db.get('items').find({ id }).value();
   }
 
-  update(id, props) {
+  update(id, properties) {
     const item = this.db.get('items').find({ id });
     const oldItem = item.value();
 
@@ -69,7 +69,7 @@ export default class ItemModel extends BaseModel {
 
     const itemData = {
       ...oldItem,
-      props: {...oldItem.props, ...props},
+      properties: {...oldItem.properties, ...properties},
       updatedAt: Date.now()
     };
 

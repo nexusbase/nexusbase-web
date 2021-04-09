@@ -7,16 +7,16 @@ import { useNavigation } from '@react-navigation/core';
 export default () => {
   const navigation = useNavigation();
   const { collection, view, items } = useSelector((state) => ({
-    collection: state.collections.collection,
-    view: state.views.view,
-    items: state.items.items,
+    collection: state.collection.collection,
+    view: state.view.view,
+    items: state.item.items,
   }));
 
   const openItem = (itemId) => {
     navigation.push('ViewItem', {id: itemId});
   }
 
-  /* dev: go straight to item
+  //* dev: go straight to item
   useEffect(() => {
     if (items) {
        openItem(items[0].id);

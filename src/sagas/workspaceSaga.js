@@ -5,8 +5,8 @@ import { generateId } from '../utils';
 import {
   createWorkspaceSuccess,
   getWorkspaceSuccess
-} from '../actions/workspaces';
-import { setLastVisitedStart } from '../actions/app';
+} from '../actions/workspaceActions';
+import { setLastVisitedStart } from '../actions/appActions';
 
 function* createWorkspaceSaga({ payload }) {
   try {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCollectionsStart } from '../../actions/collections';
+import { getCollectionsStart } from '../../actions/collectionActions';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Drawer, DrawerItem, Icon } from '@ui-kitten/components';
 import ViewWorkspaceScreen from '../screens/ViewWorkspaceScreen';
@@ -12,8 +12,8 @@ const WorkspaceDrawer = createDrawerNavigator();
 const WorkspaceDrawerContent = ({ navigation, state }) => {
   const dispatch = useDispatch();
   const { workspace, collections } = useSelector((state) => ({
-    workspace: state.workspaces.workspace,
-    collections: state.collections.collections,
+    workspace: state.workspace.workspace,
+    collections: state.collection.collections,
   }));
 
   useEffect(() => {

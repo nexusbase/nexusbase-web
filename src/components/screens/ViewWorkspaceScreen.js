@@ -6,13 +6,17 @@ import {
   Layout,
   List,
   ListItem,
+  MenuItem,
+  OverflowMenu,
   Text,
+  TopNavigation,
+  TopNavigationAction,
 } from '@ui-kitten/components';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
 import { useDispatch, useSelector } from 'react-redux';
-import { getWorkspaceStart } from '../../actions/workspaces';
-import { useIsFocused } from '@react-navigation/native';
-import { getCollectionsStart } from '../../actions/collections';
+import { getWorkspaceStart } from '../../actions/workspaceActions';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { getCollectionsStart } from '../../actions/collectionActions';
 
 function Navigation() {
   const navigation = useNavigation();
@@ -77,8 +81,8 @@ export default ({ navigation, route }) => {
   const isFocused = useIsFocused();
   const workspaceId = route.params.id;
   const { workspace, collections } = useSelector((state) => ({
-    workspace: state.workspaces.workspace,
-    collections: state.collections.collections,
+    workspace: state.workspace.workspace,
+    collections: state.collection.collections,
   }));
 
   useEffect(() => {

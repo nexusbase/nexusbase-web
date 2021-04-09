@@ -1,23 +1,25 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
-import {updateItemStart} from '../actions/items';
+import {updateItemStart} from '../actions/itemActions';
 import { StyleSheet, View } from 'react-native';
-import PropFactory from './factories/PropFactory';
-import PropWidget from './PropWidget';
+import PropertyFactory from './factories/PropertyFactory';
+import PropertyWidget from './PropertyWidget';
 import { Spinner } from '@ui-kitten/components';
 
-function PropInput({ prop, item, update }) {
+function PropInput({ collection, propertyId, item, update }) {
   const [focus, setFocus] = useState(false);
 
   return (
-    <View key={prop.id}>
-      <PropWidget
-        collectionProp={prop}
+    <View>
+      <PropertyWidget
+        collection={collection}
+        propertyId={propertyId}
         focus={focus}
       />
-      <PropFactory
+      <PropertyFactory
         edit
-        collectionProp={prop}
+        collection={collection}
+        propertyId={propertyId}
         item={item}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
@@ -27,19 +29,19 @@ function PropInput({ prop, item, update }) {
   )
 }
 
-export default function ItemForm({ collectionProps, item }) {
+export default function({ collection, item }) {
   const dispatch = useDispatch();
-  const updateProp = (propId, value) => {
-    const updatedProps = {[propId]: value};
+  const updateProperties = (propertyId, value) => {
+    const updatedProperties = {[propertyId]: value};
     dispatch(updateItemStart(
       {
         id: item.id,
-        props: updatedProps
+        properties: updatedProperties
       }
     ));
   };
 
-  if (!collectionProps || !item) {
+  if (!collection || !item) {
     return (
       <View style={styles.loading}>
         <Spinner size='giant' />
@@ -49,12 +51,13 @@ export default function ItemForm({ collectionProps, item }) {
 
   return (
     <View>
-      {collectionProps.map(prop =>
+      {collection.properties.map(property =>
         <PropInput
-          key={prop.id}
-          prop={prop}
+          key={property.id}
+          propertyId={property.id}
+          collection={collection}
           item={item}
-          update={nextValue => updateProp(prop.id, nextValue)}
+          update={nextValue => updateProperties(property.id, nextValue)}
         />
       )}
     </View>

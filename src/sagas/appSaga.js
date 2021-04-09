@@ -1,8 +1,8 @@
 import { takeLatest, call, put} from 'redux-saga/effects';
 import { throwIfDev } from '../utils';
 import { appDb } from '../services/localDatabase'
-import { getWorkspacesSuccess } from '../actions/workspaces';
-import { getAppDataFailed, getAppDataSuccess, setLastVisitedSuccess } from '../actions/app';
+import { getWorkspacesSuccess } from '../actions/workspaceActions';
+import { getAppDataFailed, getAppDataSuccess, setLastVisitedSuccess } from '../actions/appActions';
 
 export function* fetchAppData() {
   try {

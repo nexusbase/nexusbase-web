@@ -1,15 +1,18 @@
 import React, {useState} from 'react';
 import {Input, Text} from '@ui-kitten/components';
+import { getPropertyFromCollection } from '../../utils';
 
 export default ({
-  collectionProp,
+  collection,
+  propertyId,
   item,
   edit,
   onFocus,
   onBlur,
   update
 }) => {
-  const initialValue = item.props[collectionProp.id];
+  const property = getPropertyFromCollection(propertyId, collection);
+  const initialValue = item.properties[property.id];
   const [value, setValue] = useState(initialValue);
   
   if (!edit) {
@@ -24,7 +27,7 @@ export default ({
 
   return (
     <Input
-      placeholder={collectionProp.label}
+      placeholder={property.label}
       value={value}
       onChangeText={onChangeText}
       onFocus={onFocus}

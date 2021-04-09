@@ -1,17 +1,17 @@
 import { all } from 'redux-saga/effects'
-import app from './app';
-import workspaces from './workspaces';
-import collections from './collections';
-import views from './views';
-import items from './items';
+import appSaga from './appSaga';
+import workspaceSaga from './workspaceSaga';
+import collectionSaga from './collectionSaga';
+import viewSaga from './viewSaga';
+import itemSaga from './itemSaga';
 
 function* saga() {
   yield all([
-    app(),
-    workspaces(),
-    collections(),
-    views(),
-    items(),
+    appSaga(),
+    workspaceSaga(),
+    collectionSaga(),
+    viewSaga(),
+    itemSaga(),
   ])
 }
 

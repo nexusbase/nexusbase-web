@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoadingScreen from '../screens/LoadingScreen';
 import IntroScreen from '../screens/IntroScreen';
-import WorkspaceNavigator from './WorkspaceNavigator';
+import WorkspaceDrawerNavigator from './WorkspaceDrawerNavigator';
 import AddWorkspaceScreen from '../screens/AddWorkspaceScreen';
 import AddCollectionScreen from '../screens/AddCollectionScreen';
 import ItemScreen from '../screens/ItemScreen';
@@ -25,7 +25,7 @@ export default () => {
       />
       <RootStack.Screen
         name="Workspace"
-        component={WorkspaceNavigator}
+        component={WorkspaceDrawerNavigator}
       />
       <RootStack.Screen
         name="AddCollection"

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useIsFocused, useNavigation } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFormItemStart, clearFormItem } from '../../actions/items';
+import { getFormItemStart, clearFormItem } from '../../actions/itemActions';
 import { StyleSheet, View } from 'react-native';
 import {
   Icon,
@@ -78,8 +78,8 @@ export default ({ navigation, route }) => {
   const isFocused = useIsFocused();
   const itemId = route.params.id;
   const { collections, item } = useSelector((state) => ({
-    collections: state.collections.collections,
-    item: state.items.form[itemId],
+    collections: state.collection.collections,
+    item: state.item.form[itemId],
   }));
 
   useEffect(() => {
@@ -96,7 +96,7 @@ export default ({ navigation, route }) => {
     <ScreenSafeAreaView>
       <Navigation />
       <Layout style={styles.container}>
-        <ItemForm collectionProps={item ? getCollection().props : null} item={item} />
+        <ItemForm collection={item ? getCollection() : null} item={item} />
       </Layout>
     </ScreenSafeAreaView>
   );

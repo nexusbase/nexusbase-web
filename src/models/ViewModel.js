@@ -12,7 +12,7 @@ export default class ViewModel extends BaseModel {
     collectionId,
     name = '',
     type = 'list',
-    fields,
+    properties,
     options = {}
   }) {
 
@@ -23,7 +23,7 @@ export default class ViewModel extends BaseModel {
       collectionId,
       name,
       type,
-      fields,
+      properties,
       options,
       createdAt: timestamp,
       updatedAt: timestamp

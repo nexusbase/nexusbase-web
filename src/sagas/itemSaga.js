@@ -2,7 +2,7 @@ import { takeLatest, call, put, select} from 'redux-saga/effects';
 import { throwIfDev } from '../utils';
 import { workspaceDb } from '../services/localDatabase';
 import ItemModel from "../models/ItemModel";
-import { createItemSuccess, getItemsSuccess, getFormItemSuccess, updateItemSuccess } from "../actions/items";
+import { createItemSuccess, getItemsSuccess, getFormItemSuccess, updateItemSuccess } from "../actions/itemActions";
 
 function* createItemsSaga({ payload }) {
   try {
@@ -21,8 +21,8 @@ function* getItemsSaga() {
   try {
     const { workspaceId, collectionId } = yield select(state => (
       {
-        workspaceId: state.workspaces.workspace.id,
-        collectionId: state.collections.collection.id,
+        workspaceId: state.workspace.workspace.id,
+        collectionId: state.collection.collection.id,
       }
     ));
     const db = yield call(workspaceDb, workspaceId);
@@ -38,7 +38,7 @@ function* getItemsSaga() {
 
 function* getFormItemSaga({ payload }) {
   try {
-    const workspaceId = yield select(state => state.workspaces.workspace.id);
+    const workspaceId = yield select(state => state.workspace.workspace.id);
     const db = yield call(workspaceDb, workspaceId);
     const itemModel = new ItemModel(db);
     const item = itemModel.find(payload);
@@ -57,10 +57,10 @@ function* getFormItemSaga({ payload }) {
 
 function* updateItemSaga({ payload }) {
   try {
-    const workspaceId = yield select(state => state.workspaces.workspace.id);
+    const workspaceId = yield select(state => state.workspace.workspace.id);
     const db = yield call(workspaceDb, workspaceId);
     const itemModel = new ItemModel(db);
-    const item = itemModel.update(payload.id, payload.props);
+    const item = itemModel.update(payload.id, payload.properties);
     
     if (item) {
       yield put(updateItemSuccess(item));

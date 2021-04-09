@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
-import app from './app';
-import workspaces from './workspaces';
-import collections from './collections';
-import views from './views';
-import items from './items';
+import app from './appReducer';
+import workspace from './workspaceReducer';
+import collection from './collectionReducer';
+import view from './viewReducer';
+import item from './itemReducer';
 
 export default combineReducers({
   app,
-  workspaces,
-  collections,
-  views,
-  items,
+  workspace,
+  collection,
+  view,
+  item,
 });

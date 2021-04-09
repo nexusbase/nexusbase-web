@@ -6,9 +6,9 @@ import {
 } from '@ui-kitten/components';
 import { useIsFocused } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { getViewsStart, getViewStart } from '../../actions/views';
-import { getCollectionStart } from '../../actions/collections';
-import { getItemsStart } from '../../actions/items';
+import { getViewsStart, getViewStart } from '../../actions/viewActions';
+import { getCollectionStart } from '../../actions/collectionActions';
+import { getItemsStart } from '../../actions/itemActions';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
 import ViewFactory from '../factories/ViewFactory';
 
@@ -18,11 +18,11 @@ export default ({ navigation, route }) => {
   const [viewId, setViewId] = useState(null);
   const collectionId = route.params.id;
   const { workspace, collection, views, view } = useSelector((state) => ({
-    workspace: state.workspaces.workspace,
-    collection: state.collections.collection,
+    workspace: state.workspace.workspace,
+    collection: state.collection.collection,
     lastWorkspace: state.app.lastWorkspace,
-    views: state.views.views,
-    view: state.views.view,
+    views: state.view.views,
+    view: state.view.view,
   }));
 
   useEffect(() => {
