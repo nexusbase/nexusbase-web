@@ -37,3 +37,7 @@ export const updateItemStart = (payload) => ({
 export const updateItemSuccess = (payload) => ({
   type: 'UPDATE_ITEM_SUCCESS'
 });
+
+export const clearItem = (payload) => ({
+  type: 'CLEAR_ITEM'
+});

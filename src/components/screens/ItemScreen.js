@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useIsFocused, useNavigation } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { getItemStart } from '../../actions/items';
+import { getItemStart, clearItem } from '../../actions/items';
 import { StyleSheet, View } from 'react-native';
 import {
   Icon,
@@ -77,18 +77,17 @@ export default ({ navigation, route }) => {
   const isFocused = useIsFocused();
   const [modified, setModified] = useState(false);
   const itemId = route.params.id;
-  const { workspace, collections, item, view } = useSelector((state) => ({
-    workspace: state.workspaces.workspace,
+  const { collections, item } = useSelector((state) => ({
     collections: state.collections.collections,
-    lastWorkspace: state.app.lastWorkspace,
     item: state.items.item,
-    view: state.views.view,
   }));
 
   useEffect(() => {
     if(isFocused) {
       dispatch(getItemStart(itemId));
     }
+
+    return () => dispatch(clearItem())
   }, [isFocused]);
   
   if (!item) {

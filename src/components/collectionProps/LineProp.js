@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {Input, Text} from '@ui-kitten/components';
 
 export default ({
@@ -9,15 +9,16 @@ export default ({
   onBlur,
   update
 }) => {
-  const data = item.props[collectionProp.id];
-  const [value, setValue] = useState(data);
+  const initialValue = item.props[collectionProp.id];
+  const [value, setValue] = useState(initialValue);
   
   if (!edit) {
-    return <Text>{data}</Text>;
+    return <Text>{initialValue}</Text>;
   }
 
   const onChangeText = nextValue => {
     setValue(nextValue);
+    // todo: debounce
     update(nextValue);
   }
 
