@@ -10,7 +10,7 @@ import ItemScreen from '../screens/ItemScreen';
 export default () => {
   const RootStack = createStackNavigator();
   return (
-    <RootStack.Navigator headerMode='none'>
+    <RootStack.Navigator>
       <RootStack.Screen
         name="Loading"
         component={LoadingScreen}

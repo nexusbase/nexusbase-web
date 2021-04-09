@@ -5,6 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Drawer, DrawerItem, Icon } from '@ui-kitten/components';
 import ViewWorkspaceScreen from '../screens/ViewWorkspaceScreen';
 import ViewCollectionScreen from '../screens/ViewCollectionScreen';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const WorkspaceDrawer = createDrawerNavigator();
 
@@ -66,11 +67,13 @@ const WorkspaceDrawerContent = ({ navigation, state }) => {
   };
 
   return (
-    <Drawer
-      data={getRoutes().map(createDrawerItem)}
-      onSelect={indexPath => navigation.navigate(getRoutes()[indexPath.row])}>
-      {getRoutes().map(createDrawerItem)}
-    </Drawer>
+    <SafeAreaView>
+      <Drawer
+        data={getRoutes().map(createDrawerItem)}
+        onSelect={indexPath => navigation.navigate(getRoutes()[indexPath.row])}>
+        {getRoutes().map(createDrawerItem)}
+      </Drawer>
+    </SafeAreaView>
   );
 };
 

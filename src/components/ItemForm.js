@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {updateItemStart} from '../actions/items';
-import {View} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import PropFactory from './factories/PropFactory';
 import PropWidget from './PropWidget';
+import { Spinner } from '@ui-kitten/components';
 
 function PropInput({ prop, item, update }) {
   const [focus, setFocus] = useState(false);
@@ -26,7 +27,7 @@ function PropInput({ prop, item, update }) {
   )
 }
 
-export default function ItemForm({ collectionProps, item, setModified }) {
+export default function ItemForm({ collectionProps, item }) {
   const dispatch = useDispatch();
   const updateProp = (propId, value) => {
     const updatedProps = {[propId]: value};
@@ -37,6 +38,14 @@ export default function ItemForm({ collectionProps, item, setModified }) {
       }
     ));
   };
+
+  if (!collectionProps || !item) {
+    return (
+      <View style={styles.loading}>
+        <Spinner size='giant' />
+      </View>
+    )
+  }
 
   return (
     <View>
@@ -51,3 +60,10 @@ export default function ItemForm({ collectionProps, item, setModified }) {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  loading: {
+    alignItems: 'center',
+    paddingTop: 100,
+  },
+});

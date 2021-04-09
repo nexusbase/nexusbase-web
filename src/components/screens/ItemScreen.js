@@ -8,6 +8,7 @@ import {
   Layout,
   MenuItem,
   OverflowMenu,
+  Spinner,
   Text,
   TopNavigation,
   TopNavigationAction,
@@ -88,26 +89,14 @@ export default ({ navigation, route }) => {
 
     return () => dispatch(clearFormItem(itemId))
   }, [isFocused]);
-  
-  if (!item) {
-    return (
-      <ScreenSafeAreaView>
-        <Layout style={styles.container}>
-          <Text style={styles.text} category="h1">
-            Loading item...
-          </Text>
-        </Layout>
-      </ScreenSafeAreaView>
-    );
-  }
 
-  const collection = collections.find(collection => collection.id === item.collectionId);
+  const getCollection = () => collections.find(collection => collection.id === item.collectionId);
 
   return (
     <ScreenSafeAreaView>
       <Navigation />
       <Layout style={styles.container}>
-        <ItemForm collectionProps={collection.props} item={item} />
+        <ItemForm collectionProps={item ? getCollection().props : null} item={item} />
       </Layout>
     </ScreenSafeAreaView>
   );

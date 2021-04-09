@@ -5,7 +5,7 @@ import { Button, Text, Icon } from '@ui-kitten/components';
 
 export default ({ collectionProp, focus }) => {
   const propData = collectionProps[collectionProp.type];
-  const labelStyle = focus ? {...styles.label, ...styles.labelFocus} : styles.label;
+  const labelStyle = focus ? styles.labelFocus : {};
 
   if (!propData) {
     throw new Error('Unkwon prop type:' + collectionProp.type);
@@ -18,11 +18,13 @@ export default ({ collectionProp, focus }) => {
   return (
     <View style={styles.container}>
       <Button
-        style={styles.iconButton}
+        style={styles.button}
         appearance='ghost'
         accessoryLeft={PropIcon}
       >
-        <Text style={labelStyle}>{collectionProp.label}</Text>
+        {evaProps =>
+          <Text {...evaProps} style={labelStyle}>{collectionProp.label}</Text>
+        }
       </Button>
     </View>
   )
@@ -32,19 +34,16 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row'
   },
-  label: {
-    marginTop: 15,
-    marginBottom: 10,
-  },
-  labelFocus: {
-    color: 'blue'
-  },
-  iconButton: {
+  button: {
     paddingLeft: 0,
     marginBottom: 8,
+    marginTop: 4,
   },
   icon: {
     width: 32,
     height: 32,
+  },
+  labelFocus: {
+    color: 'blue'
   },
 });
