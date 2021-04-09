@@ -60,5 +60,16 @@ export const demoWorkspaceDb = {
       createdAt: 1602788444644,
       updatedAt: 1602795923972
     },
+    {
+      id: "CXJCQ_X78",
+      collectionId: "j7mzSbVcb",
+      props: {
+        f1: "jfggptpy6",
+        f2: "SomeRandomSurname",
+        f3: "0123456789"
+      },
+      createdAt: 1602788444644,
+      updatedAt: 1602795923972
+    },
   ]
 };

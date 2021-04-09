@@ -16,7 +16,7 @@ const WorkspaceDrawerContent = ({ navigation, state }) => {
   }));
 
   useEffect(() => {
-    if (!collections) {
+    if (workspace && !collections) {
       dispatch(getCollectionsStart());
     }
   }, [workspace, collections]);

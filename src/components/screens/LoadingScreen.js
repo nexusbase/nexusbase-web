@@ -12,13 +12,12 @@ import { getWorkspaceStart } from '../../actions/workspaces';
 
 export default ({ navigation }) => {
   const dispatch = useDispatch();
-  const { dataLoaded, lastWorkspace, lastCollection, workspaces, workspace, collections } = useSelector((state) => ({
+  const { dataLoaded, lastWorkspace, lastCollection, workspaces, workspace } = useSelector((state) => ({
     dataLoaded: state.app.dataLoaded,
     lastWorkspace: state.app.lastWorkspace,
     lastCollection: state.app.lastCollection,
     workspaces: state.workspaces.workspaces,
     workspace: state.workspaces.workspace,
-    collections: state.collections.collections,
   }));
 
   const nextScreen = () => {
@@ -31,9 +30,12 @@ export default ({ navigation }) => {
     
     if (!lastCollection) {
       if (lastWorkspace) {
+        const lastWorkspaceExists = workspaces.map(w => w.id).includes(lastWorkspace)
+        const workspaceId = lastWorkspaceExists ? lastWorkspace : workspaces[0].id;
+
         navigation.replace('Workspace', {
           screen: 'ViewWorkspace',
-          params: {id: lastWorkspace}
+          params: {id: workspaceId}
         });
       }
       return;
@@ -55,7 +57,7 @@ export default ({ navigation }) => {
 
   useEffect(() => {
     nextScreen();
-  }, [dataLoaded, workspace, collections]);
+  }, [dataLoaded, workspace]);
 
   return (
     <ScreenSafeAreaView>
