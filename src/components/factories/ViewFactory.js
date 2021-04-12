@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Spinner } from '@ui-kitten/components';
 import { useSelector } from 'react-redux';
 import ListView from '../views/ListView';
@@ -16,10 +16,12 @@ export default () => {
     navigation.push('ViewItem', {id: itemId});
   }
 
-  //* dev: go straight to item
-  useEffect(() => {
-    if (items) {
-       openItem(items[0].id);
+  /* dev: go straight to item
+  const [firstRender, setFirstRender] = React.useState(true);
+  React.useEffect(() => {
+    if (items && firstRender) {
+      setFirstRender(false);
+      openItem(items[0].id);
     }
   }, [items]);
   //*/

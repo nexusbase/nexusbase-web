@@ -7,6 +7,7 @@ export const initialState = {
   items: null,// []
   related: null,// []
   item: null,
+  rehydrateItems: false,
   form: {},
 };
 
@@ -38,6 +39,7 @@ export default (state = initialState, action) => {
         items: action.payload.items,
         related: action.payload.related,
         isFetchingList: false,
+        rehydrateItems: false,
       };
     }
 
@@ -74,6 +76,13 @@ export default (state = initialState, action) => {
         form,
         isFetchingOne: false,
       };
+    }
+
+    case 'UPDATE_ITEM_SUCCESS': {
+      return {
+        ...state,
+        rehydrateItems: true,
+      }
     }
     
     case 'CLEAR_ITEMS': {

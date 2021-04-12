@@ -17,12 +17,13 @@ export default ({ navigation, route }) => {
   const isFocused = useIsFocused();
   const [viewId, setViewId] = useState(null);
   const collectionId = route.params.id;
-  const { workspace, collection, views, view } = useSelector((state) => ({
+  const { workspace, collection, views, view, rehydrateItems } = useSelector((state) => ({
     workspace: state.workspace.workspace,
     collection: state.collection.collection,
     lastWorkspace: state.app.lastWorkspace,
     views: state.view.views,
     view: state.view.view,
+    rehydrateItems: state.item.rehydrateItems,
   }));
 
   useEffect(() => {
@@ -46,6 +47,12 @@ export default ({ navigation, route }) => {
       dispatch(getViewStart(viewId));
     }
   }, [views, viewId]);
+
+  useEffect(() => {
+    if (rehydrateItems) {console.log({rehydrateItems})
+      dispatch(getItemsStart());
+    }
+  }, [rehydrateItems]);
 
   if (!collection) {
     return (

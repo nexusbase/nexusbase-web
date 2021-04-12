@@ -31,7 +31,7 @@ function PropInput({ collection, propertyId, item, update }) {
 
 export default function({ collection, item }) {
   const dispatch = useDispatch();
-  const updateProperties = (propertyId, value) => {
+  const updateProperty = (propertyId, value) => {
     const updatedProperties = {[propertyId]: value};
     dispatch(updateItemStart(
       {
