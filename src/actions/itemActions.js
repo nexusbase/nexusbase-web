@@ -34,7 +34,7 @@ export const updateItemStart = (payload) => ({
   payload
 });
 
-export const updateItemSuccess = (payload) => ({
+export const updateItemSuccess = () => ({
   type: 'UPDATE_ITEM_SUCCESS'
 });
 

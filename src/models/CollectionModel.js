@@ -79,8 +79,30 @@ export default class CollectionModel extends BaseModel {
     };
   }
 
-  updateProperty(args) {
-    const { collectionId, propertyId, data: updatedProperty } = args;
+  addProperty(args) {
+    const { collectionId } = args;
+    const collectionRef = this.db.get('collections').find({ id: collectionId });
+    let collection = collectionRef.value();
+    
+    if (!collection) {
+      throw new Error(`Collection not found: ${collectionId}`);
+    }
+
+    //const id
+
+    collection.properties.push({
+      id: 'f1',
+      type: 'line',
+      label: 'Title'
+    });
+    collection.updatedAt = Date.now();
+
+    collectionRef.assign(collection).write();
+    
+    return collectionRef.value();
+  }
+
+  updateProperty(collectionId, propertyId, data) {
     const collectionRef = this.db.get('collections').find({ id: collectionId });
     let collection = collectionRef.value();
     
@@ -94,18 +116,14 @@ export default class CollectionModel extends BaseModel {
       throw new Error(`Collection [${collectionId}] prop not found [${propertyId}]`);
     }
 
-    const propertyIndex = collection.properties.findIndex(property => property.id === propertyId);
-    const timestamp = Date.now();
-    collection.properties[propertyIndex] = { ...updatedProperty, id: propertyId };
-    collection.updatedAt = timestamp;
+    const propertyIndex = collection.properties.findIndex(prop => prop.id === property.id);
+    const updatedProperty = { ...property, ...data, id: property.id };
+    // todo: validate property
+    collection.properties[propertyIndex] = updatedProperty;
+    collection.updatedAt = Date.now();
 
     collectionRef.assign(collection).write();
     
-    const views = this.db.get('views').filter({ collectionId: collection.id }).value();
-    
-    return {
-      collection: { ...collectionRef.value(), views },
-      related: this.relatedCollections(collection)
-    };
+    return collectionRef.value();
   }
 }

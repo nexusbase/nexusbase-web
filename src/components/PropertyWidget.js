@@ -20,15 +20,13 @@ export default function({ collection, propertyId, focus }) {
   );
 
   const handleOnPress = () => {
-    /*
     navigation.push(
-      'EditProp',
+      'EditProperty',
       {
         collectionId: collection.id,
         propertyId,
       }
     );
-    */
   };
 
   return (
@@ -40,7 +38,7 @@ export default function({ collection, propertyId, focus }) {
         onPress={handleOnPress}
       >
         {evaProps =>
-          <Text {...evaProps} style={labelStyle}>{property.label}</Text>
+          <Text {...evaProps} style={labelStyle}>{property.name}</Text>
         }
       </Button>
     </View>

@@ -6,6 +6,7 @@ export const initialState = {
   newId: null,
   collections: null,// []
   collection: null,
+  rehydrateCollections: false,
 };
 
 export default (state = initialState, action) => {
@@ -35,22 +36,15 @@ export default (state = initialState, action) => {
         ...state,
         collections: action.payload,
         isFetchingList: false,
+        rehydrateCollections: false,
       };
     }
 
-    case 'GET_COLLECTION_START': {
+    case 'UPDATE_PROPERTY_SUCCESS': {
       return {
         ...state,
-        isFetchingOne: true,
-        newId: null,
-      };
-    }
-    case 'GET_COLLECTION_SUCCESS': {
-      return {
-        ...state,
-        collection: action.payload,
-        isFetchingOne: false,
-      };
+        rehydrateCollections: true,
+      }
     }
 
     case 'CLEAR_COLLECTIONS': {

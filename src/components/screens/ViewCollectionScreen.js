@@ -6,8 +6,8 @@ import {
 } from '@ui-kitten/components';
 import { useIsFocused } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { getViewsStart, getViewStart } from '../../actions/viewActions';
-import { getCollectionStart } from '../../actions/collectionActions';
+import { setLastVisitedStart } from '../../actions/appActions';
+import { getViewsStart } from '../../actions/viewActions';
 import { getItemsStart } from '../../actions/itemActions';
 import ScreenSafeAreaView from '../ScreenSafeAreaView';
 import ViewFactory from '../factories/ViewFactory';
@@ -17,44 +17,50 @@ export default ({ navigation, route }) => {
   const isFocused = useIsFocused();
   const [viewId, setViewId] = useState(null);
   const collectionId = route.params.id;
-  const { workspace, collection, views, view, rehydrateItems } = useSelector((state) => ({
-    workspace: state.workspace.workspace,
-    collection: state.collection.collection,
-    lastWorkspace: state.app.lastWorkspace,
-    views: state.view.views,
-    view: state.view.view,
-    rehydrateItems: state.item.rehydrateItems,
-  }));
-
-  useEffect(() => {
-    if (isFocused) {
-      if (!collection || collection.id != collectionId){
-        dispatch(getCollectionStart(collectionId));
-      }
-      if (collection && !views) {
-        dispatch(getViewsStart());
-        dispatch(getItemsStart());
-      }
+  let view = null;
+  const { workspace, collection, views, rehydrateItems } = useSelector((state) => {
+    let currentCollection = null;
+    const collections = state.collection.collections
+    if (collections) {
+      currentCollection = collections.find(col => col.id === collectionId);
     }
-  }, [collectionId, collection, isFocused]);
 
+    return {
+      workspace: state.workspace.workspace,
+      collection: currentCollection,
+      lastWorkspace: state.app.lastWorkspace,
+      views: state.view.views,
+      rehydrateItems: state.item.rehydrateItems,
+    };
+  });
+
+  // on focus effect
+  useEffect(() => {
+    if (isFocused && collection) {
+      dispatch(setLastVisitedStart({ collection: collectionId }));
+      dispatch(getViewsStart(collectionId));
+      dispatch(getItemsStart({ collectionId }));
+    }
+  }, [isFocused, collectionId, collection]);
+  
   useEffect(() => {
     if (!viewId && views) {
       setViewId(views[0].id);
     }
+  }, [views]);
 
-    if (viewId && !view) {
-      dispatch(getViewStart(viewId));
-    }
-  }, [views, viewId]);
-
+  // items effect
   useEffect(() => {
-    if (rehydrateItems) {console.log({rehydrateItems})
+    if (rehydrateItems) {
       dispatch(getItemsStart());
     }
   }, [rehydrateItems]);
 
-  if (!collection) {
+  if (views) {
+    view = views.find(view => view.id === viewId) || views[0];
+  }
+
+  if (!collection || !view) {
     return (
       <ScreenSafeAreaView>
         <Layout style={styles.container}>
@@ -75,7 +81,7 @@ export default ({ navigation, route }) => {
             </Text>
           </View>
           <View>  
-            <ViewFactory />
+            <ViewFactory collection={collection} view={view} />
           </View>
       </Layout>
     </ScreenSafeAreaView>

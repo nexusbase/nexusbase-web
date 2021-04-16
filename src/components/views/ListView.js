@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {Divider, List, ListItem} from '@ui-kitten/components';
+import {StyleSheet, View} from 'react-native';
+import {Divider, List, ListItem, Text} from '@ui-kitten/components';
 
 export default ({ view, collection, items, openItem }) => {
   const renderItem = ({ item }) => (
@@ -13,12 +13,18 @@ export default ({ view, collection, items, openItem }) => {
   return (
     <>
       <Divider />
-      <List
-        style={styles.container}
-        data={items}
-        ItemSeparatorComponent={Divider}
-        renderItem={renderItem}
-      />
+      {items.length ?
+        <List
+          style={styles.container}
+          data={items}
+          ItemSeparatorComponent={Divider}
+          renderItem={renderItem}
+        />
+        :
+        <View style={styles.noItemsContainer}>
+          <Text>No items found</Text>
+        </View>
+      }
     </>
   );
 }
@@ -31,5 +37,10 @@ const styles = StyleSheet.create({
   },
   likeButton: {
     marginVertical: 16,
+  },
+  noItemsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingTop: 30,
   },
 });

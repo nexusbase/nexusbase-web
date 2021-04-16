@@ -4,6 +4,7 @@ import { workspaceDb } from '../services/localDatabase';
 import { setLastVisitedStart } from '../actions/appActions';
 import ViewModel from "../models/ViewModel";
 import { createViewSuccess, getViewsSuccess, getViewSuccess } from "../actions/viewActions";
+import { DrawerContentScrollView } from '@react-navigation/drawer';
 
 function* createViewSaga({ payload }) {
   try {
@@ -18,17 +19,12 @@ function* createViewSaga({ payload }) {
   }
 }
 
-function* getViewsSaga() {
+function* getViewsSaga({ payload }) {
   try {
-    const { workspaceId, collectionId } = yield select(state => (
-      {
-        workspaceId: state.workspace.workspace.id,
-        collectionId: state.collection.collection.id,
-      }
-    ));
+    const workspaceId = yield select(state => state.workspace.workspace.id);
     const db = yield call(workspaceDb, workspaceId);
     const viewModel = new ViewModel(db);
-    const views = viewModel.get(collectionId);
+    const views = viewModel.get(payload);
     yield put(getViewsSuccess(views));
 
   } catch (e) {

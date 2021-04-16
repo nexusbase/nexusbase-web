@@ -11,6 +11,6 @@ export function generateId(firstChar) {
   return firstChar + nanoid() + Date.now();
 }
 
-export function getPropertyFromCollection(propId, collection) {
-  return collection.properties.find(prop => prop.id === propId);
+export function getPropertyFromCollection(propertyId, collection) {
+  return collection.properties.find(property => property.id === propertyId);
 }

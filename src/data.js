@@ -15,17 +15,17 @@ export const demoWorkspaceDb = {
         {
           id: "f1",
           type: "line",
-          label: "Firstname"
+          name: "Firstname"
         },
         {
           id: "f2",
           type: "line",
-          label: "Lastname"
+          name: "Lastname"
         },
         {
           id: "f3",
           type: "line",
-          label: "Phone number"
+          name: "Phone number"
         },
       ],
       titleProperty: "f1",
@@ -38,7 +38,19 @@ export const demoWorkspaceDb = {
     {
       id: "Ui1VO-haWv",
       collectionId: "j7mzSbVcb",
-      name: "",
+      name: "List",
+      type: "list",
+      properties: ["f1", "f2", "f3"],
+      options: {
+        groupBy: null
+      },
+      createdAt: 1591546431899,
+      updatedAt: 1591546431899
+    },
+    {
+      id: "Ui1VO-haWv",
+      collectionId: "j7mzSbVcb",
+      name: "List 2",
       type: "list",
       properties: ["f1", "f2", "f3"],
       options: {
@@ -53,8 +65,8 @@ export const demoWorkspaceDb = {
       id: "CXJCQ_X6S",
       collectionId: "j7mzSbVcb",
       properties: {
-        f1: "SomeRandomName",
-        f2: "SomeRandomSurname",
+        f1: "SomeName",
+        f2: "SomeSurname",
         f3: "0123456789"
       },
       createdAt: 1602788444644,
@@ -64,9 +76,9 @@ export const demoWorkspaceDb = {
       id: "CXJCQ_X78",
       collectionId: "j7mzSbVcb",
       properties: {
-        f1: "jfggptpy6",
-        f2: "SomeRandomSurname",
-        f3: "0123456789"
+        f1: "John",
+        f2: "Doe",
+        f3: "879944648"
       },
       createdAt: 1602788444644,
       updatedAt: 1602795923972

@@ -17,17 +17,12 @@ function* createItemsSaga({ payload }) {
   }
 }
 
-function* getItemsSaga() {
+function* getItemsSaga({ payload }) {
   try {
-    const { workspaceId, collectionId } = yield select(state => (
-      {
-        workspaceId: state.workspace.workspace.id,
-        collectionId: state.collection.collection.id,
-      }
-    ));
+    const workspaceId = yield select(state => state.workspace.workspace.id);
     const db = yield call(workspaceDb, workspaceId);
     const itemModel = new ItemModel(db);
-    const itemsData = itemModel.get({ collectionId });
+    const itemsData = itemModel.get({ collectionId: payload.collectionId });
     yield put(getItemsSuccess(itemsData));
 
   } catch (e) {

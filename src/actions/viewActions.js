@@ -9,16 +9,6 @@ export const createViewSuccess = (payload) => ({
   payload
 });
 
-export const getViewStart = (payload) => ({
-  type: 'GET_VIEW_START',
-  payload
-});
-
-export const getViewSuccess = (payload) => ({
-  type: 'GET_VIEW_SUCCESS',
-  payload
-});
-
 export const getViewsStart = (payload) => ({
   type: 'GET_VIEWS_START',
   payload

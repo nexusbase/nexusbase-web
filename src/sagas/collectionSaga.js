@@ -3,7 +3,7 @@ import { throwIfDev } from '../utils';
 import { workspaceDb } from '../services/localDatabase';
 import CollectionModel from "../models/CollectionModel";
 import { setLastVisitedStart } from '../actions/appActions';
-import { createCollectionSuccess, getCollectionsSuccess, getCollectionSuccess } from "../actions/collectionActions";
+import { createCollectionSuccess, getCollectionsStart, getCollectionsSuccess, getCollectionSuccess } from "../actions/collectionActions";
 
 function* createCollectionSaga({ payload }) {
   try {
@@ -32,15 +32,17 @@ function* getCollectionsSaga() {
   }
 }
 
-function* getCollectionSaga({ payload }) {
+function* updatePropertySaga({ payload }) {
   try {
     const workspaceId = yield select(state => state.workspace.workspace.id);
     const db = yield call(workspaceDb, workspaceId);
     const collectionModel = new CollectionModel(db);
-    const collection = collectionModel.find(payload);
-    yield put(getCollectionSuccess(collection));
-    yield put(setLastVisitedStart({ collection: collection.id }));
-
+    const collection = collectionModel.updateProperty(
+      payload.collectionId,
+      payload.propertyId,
+      payload.data
+    );
+    yield put(getCollectionsStart());// reload collections data
   } catch (e) {
     throwIfDev(e);
     //yield put(getAppDataFailed());
@@ -50,5 +52,5 @@ function* getCollectionSaga({ payload }) {
 export default function* () {
   yield takeLatest('CREATE_COLLECTION_START', createCollectionSaga);
   yield takeLatest('GET_COLLECTIONS_START', getCollectionsSaga);
-  yield takeLatest('GET_COLLECTION_START', getCollectionSaga);
+  yield takeLatest('UPDATE_PROPERTY_START', updatePropertySaga);
 }

@@ -4,11 +4,9 @@ import { useSelector } from 'react-redux';
 import ListView from '../views/ListView';
 import { useNavigation } from '@react-navigation/core';
 
-export default () => {
+export default ({ collection, view }) => {
   const navigation = useNavigation();
-  const { collection, view, items } = useSelector((state) => ({
-    collection: state.collection.collection,
-    view: state.view.view,
+  const { items } = useSelector((state) => ({
     items: state.item.items,
   }));
 
@@ -26,7 +24,7 @@ export default () => {
   }, [items]);
   //*/
 
-  if (!view) {
+  if (!view || !items) {
     return <Spinner />
   }
 
