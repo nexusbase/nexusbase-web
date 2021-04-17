@@ -32,12 +32,25 @@ function* getCollectionsSaga() {
   }
 }
 
+function* updateCollectionSaga({ payload }) {
+  try {
+    const workspaceId = yield select(state => state.workspace.workspace.id);
+    const db = yield call(workspaceDb, workspaceId);
+    const collectionModel = new CollectionModel(db);
+    collectionModel.updateDetails(payload.id, payload.details);
+    yield put(getCollectionsStart());// reload collections data
+  } catch (e) {
+    throwIfDev(e);
+    //yield put(getAppDataFailed());
+  }
+}
+
 function* updatePropertySaga({ payload }) {
   try {
     const workspaceId = yield select(state => state.workspace.workspace.id);
     const db = yield call(workspaceDb, workspaceId);
     const collectionModel = new CollectionModel(db);
-    const collection = collectionModel.updateProperty(
+    collectionModel.updateProperty(
       payload.collectionId,
       payload.propertyId,
       payload.data
@@ -52,5 +65,6 @@ function* updatePropertySaga({ payload }) {
 export default function* () {
   yield takeLatest('CREATE_COLLECTION_START', createCollectionSaga);
   yield takeLatest('GET_COLLECTIONS_START', getCollectionsSaga);
+  yield takeLatest('UPDATE_COLLECTION_START', updateCollectionSaga);
   yield takeLatest('UPDATE_PROPERTY_START', updatePropertySaga);
 }

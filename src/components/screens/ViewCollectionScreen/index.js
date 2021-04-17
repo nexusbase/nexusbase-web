@@ -75,7 +75,7 @@ export default ({ navigation, route }) => {
 
   return (
     <ScreenSafeAreaView>
-      <Navigation />
+      <Navigation title={collection.name} />
       <Layout style={styles.container}>
           <View style={styles.header}>
             <Text style={styles.text} category="h1">

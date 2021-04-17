@@ -8,17 +8,21 @@ import {
   TopNavigationAction,
 } from '@ui-kitten/components';
 
-export default function Navigation({ title }) {
+export default function Navigation({ collectionId, propertyId }) {
   const navigation = useNavigation();
   const [menuVisible, setMenuVisible] = useState(false);
   const toggleMenu = () => setMenuVisible(!menuVisible);
+  const handleDelete = () => {
+    console.log({ delete: { collectionId, propertyId }})
+    /* todo:
+    delete prop
+    check if delete was successful
+    navigate back
+    */
+  };
 
-  const DrawerIcon = (props) => (
-    <Icon {...props} name='menu'/>
-  );
-  
-  const ShareIcon = (props) => (
-    <Icon {...props} name='share'/>
+  const BackIcon = (props) => (
+    <Icon {...props} name='arrow-back'/>
   );
 
   const MenuIcon = (props) => (
@@ -29,10 +33,10 @@ export default function Navigation({ title }) {
     <Icon {...props} name='info'/>
   );
 
-  const renderDrawerAction = () => (
+  const renderBackAction = () => (
     <TopNavigationAction
-      icon={DrawerIcon}
-      onPress={() => navigation.openDrawer()}
+      icon={BackIcon}
+      onPress={() => navigation.goBack()}
     />
   );
 
@@ -42,15 +46,15 @@ export default function Navigation({ title }) {
 
   const renderNavRightActions = () => (
     <>
-      <TopNavigationAction
-        icon={ShareIcon}
-        onPress={() => {}}
-      />
       <OverflowMenu
         anchor={renderMenuAction}
         visible={menuVisible}
         onBackdropPress={toggleMenu}>
-        <MenuItem accessoryLeft={InfoIcon} title='About'/>
+        <MenuItem
+          accessoryLeft={InfoIcon}
+          title='Delete'
+          onPress={handleDelete}
+        />
       </OverflowMenu>
     </>
   );
@@ -58,8 +62,8 @@ export default function Navigation({ title }) {
   return (
     <TopNavigation
       alignment='center'
-      title={title}
-      accessoryLeft={renderDrawerAction}
+      title='Edit Collection'
+      accessoryLeft={renderBackAction}
       accessoryRight={renderNavRightActions}
     />
   )

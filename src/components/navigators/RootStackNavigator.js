@@ -7,6 +7,7 @@ import AddWorkspaceScreen from '../screens/AddWorkspaceScreen';
 import AddCollectionScreen from '../screens/AddCollectionScreen';
 import ItemScreen from '../screens/ItemScreen';
 import EditProperty from '../screens/EditProperty';
+import EditCollection from '../screens/EditCollection';
 
 export default () => {
   const RootStack = createStackNavigator();
@@ -33,6 +34,10 @@ export default () => {
       <RootStack.Screen
         name="AddCollection"
         component={AddCollectionScreen}
+      />
+      <RootStack.Screen
+        name="EditCollection"
+        component={EditCollection}
       />
       <RootStack.Screen
         name="ViewItem"

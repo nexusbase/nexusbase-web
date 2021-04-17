@@ -18,6 +18,11 @@ export const getCollectionsSuccess = (payload) => ({
   payload
 });
 
+export const updateCollectionStart = (payload) => ({
+  type: 'UPDATE_COLLECTION_START',
+  payload
+});
+
 export const updatePropertyStart = (payload) => ({
   type: 'UPDATE_PROPERTY_START',
   payload

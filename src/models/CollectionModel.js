@@ -79,6 +79,27 @@ export default class CollectionModel extends BaseModel {
     };
   }
 
+  updateDetails(collectionId, details) {
+    const collectionRef = this.db.get('collections').find({ id: collectionId });
+    let collection = collectionRef.value();
+    
+    if (!collection) {
+      throw new Error(`Collection not found: ${collectionId}`);
+    }
+
+    const updatedDetails = {
+      name: details.name || collection.name,
+      description: details.description || collection.description,
+      titleProperty: details.titleProperty || collection.titleProperty,
+    };
+    collection.updatedAt = Date.now();
+
+    collectionRef.assign({ ...collection, ...updatedDetails }).write();
+    
+    return collectionRef.value();
+  }
+
+  /*
   addProperty(args) {
     const { collectionId } = args;
     const collectionRef = this.db.get('collections').find({ id: collectionId });
@@ -101,6 +122,7 @@ export default class CollectionModel extends BaseModel {
     
     return collectionRef.value();
   }
+  */
 
   updateProperty(collectionId, propertyId, data) {
     const collectionRef = this.db.get('collections').find({ id: collectionId });

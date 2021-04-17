@@ -42,7 +42,6 @@ export default ({ navigation, route }) => {
   if (!workspace) {
     return (
       <ScreenSafeAreaView>
-        <Navigation />
         <Layout style={styles.container}>
           <Text style={styles.text} category="h1">
             Loading workspace...
@@ -52,9 +51,16 @@ export default ({ navigation, route }) => {
     );
   }
 
-  // todo: drop down menu with collectio options
-  const renderItemAccessory = (props) => (
-    <Button size='tiny'>Options</Button>
+  const EditIcon = (props) => (
+    <Icon {...props} name='edit'/>
+  );
+
+  const renderItemAccessory = ({ collection }) => (
+    <Button
+      appearance='outline'
+      accessoryLeft={EditIcon}
+      onPress={() => navigation.navigate('EditCollection', {id: collection.id})}
+    />
   );
 
   const renderItemIcon = (props) => (
@@ -66,13 +72,14 @@ export default ({ navigation, route }) => {
       title={collection.name}
       description={collection.description}
       accessoryLeft={renderItemIcon}
-      accessoryRight={renderItemAccessory}
+      accessoryRight={props => renderItemAccessory({ ...props, collection })}
       onPress={() => navigation.navigate('ViewCollection', {id: collection.id})}
     />
   );
 
   return (
     <ScreenSafeAreaView>
+      <Navigation />
       <Layout style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.text} category="h1">
