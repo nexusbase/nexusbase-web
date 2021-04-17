@@ -12,68 +12,12 @@ import {
   TopNavigation,
   TopNavigationAction,
 } from '@ui-kitten/components';
-import ScreenSafeAreaView from '../ScreenSafeAreaView';
+import ScreenSafeAreaView from '../../ScreenSafeAreaView';
+import Navigation from './Navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { getWorkspaceStart } from '../../actions/workspaceActions';
+import { getWorkspaceStart } from '../../../actions/workspaceActions';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
-import { getCollectionsStart } from '../../actions/collectionActions';
-
-function Navigation() {
-  const navigation = useNavigation();
-  const [menuVisible, setMenuVisible] = useState(false);
-  const toggleMenu = () => setMenuVisible(!menuVisible);
-
-  const BackIcon = (props) => (
-    <Icon {...props} name='arrow-back'/>
-  );
-  
-  const ShareIcon = (props) => (
-    <Icon {...props} name='share'/>
-  );
-
-  const MenuIcon = (props) => (
-    <Icon {...props} name='more-vertical'/>
-  );
-
-  const InfoIcon = (props) => (
-    <Icon {...props} name='info'/>
-  );
-
-  const renderBackAction = () => (
-    <TopNavigationAction
-      icon={BackIcon}
-      onPress={() => navigation.goBack()}
-    />
-  );
-
-  const renderMenuAction = () => (
-    <TopNavigationAction icon={MenuIcon} onPress={toggleMenu}/>
-  );
-
-  const renderNavRightActions = () => (
-    <>
-      <TopNavigationAction
-        icon={ShareIcon}
-        onPress={() => {}}
-      />
-      <OverflowMenu
-        anchor={renderMenuAction}
-        visible={menuVisible}
-        onBackdropPress={toggleMenu}>
-        <MenuItem accessoryLeft={InfoIcon} title='About'/>
-      </OverflowMenu>
-    </>
-  );
-
-  return (
-    <TopNavigation
-      alignment='center'
-      title='Edit Item'
-      accessoryLeft={renderBackAction}
-      accessoryRight={renderNavRightActions}
-    />
-  )
-}
+import { getCollectionsStart } from '../../../actions/collectionActions';
 
 export default ({ navigation, route }) => {
   const dispatch = useDispatch();

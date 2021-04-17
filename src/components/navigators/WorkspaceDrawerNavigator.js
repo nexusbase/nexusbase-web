@@ -70,7 +70,8 @@ const WorkspaceDrawerContent = ({ navigation, state }) => {
     <SafeAreaView>
       <Drawer
         data={getRoutes().map(createDrawerItem)}
-        onSelect={indexPath => navigation.navigate(getRoutes()[indexPath.row])}>
+        onSelect={indexPath => navigation.navigate(getRoutes()[indexPath.row])}
+      >
         {getRoutes().map(createDrawerItem)}
       </Drawer>
     </SafeAreaView>
@@ -79,7 +80,10 @@ const WorkspaceDrawerContent = ({ navigation, state }) => {
 
 export default function() {
   return (
-    <WorkspaceDrawer.Navigator drawerContent={props => <WorkspaceDrawerContent {...props} />}>
+    <WorkspaceDrawer.Navigator
+      drawerContent={props => <WorkspaceDrawerContent {...props} />}
+      headerMode='none'
+    >
       <WorkspaceDrawer.Screen
         name={'ViewWorkspace'}
         component={ViewWorkspaceScreen}

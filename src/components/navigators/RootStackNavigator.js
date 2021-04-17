@@ -11,7 +11,9 @@ import EditProperty from '../screens/EditProperty';
 export default () => {
   const RootStack = createStackNavigator();
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator
+      headerMode='none'
+    >
       <RootStack.Screen
         name="Loading"
         component={LoadingScreen}

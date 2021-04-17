@@ -6,11 +6,12 @@ import {
 } from '@ui-kitten/components';
 import { useIsFocused } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLastVisitedStart } from '../../actions/appActions';
-import { getViewsStart } from '../../actions/viewActions';
-import { getItemsStart } from '../../actions/itemActions';
-import ScreenSafeAreaView from '../ScreenSafeAreaView';
-import ViewFactory from '../factories/ViewFactory';
+import { setLastVisitedStart } from '../../../actions/appActions';
+import { getViewsStart } from '../../../actions/viewActions';
+import { getItemsStart } from '../../../actions/itemActions';
+import ScreenSafeAreaView from '../../ScreenSafeAreaView';
+import ViewFactory from '../../factories/ViewFactory';
+import Navigation from './Navigation';
 
 export default ({ navigation, route }) => {
   const dispatch = useDispatch();
@@ -74,6 +75,7 @@ export default ({ navigation, route }) => {
 
   return (
     <ScreenSafeAreaView>
+      <Navigation />
       <Layout style={styles.container}>
           <View style={styles.header}>
             <Text style={styles.text} category="h1">
