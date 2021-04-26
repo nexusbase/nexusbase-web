@@ -33,7 +33,7 @@ class AsyncStorageDriver extends Base {
 const adapter = (dbName, options) => {
   if (Platform.OS === 'web') {
     // todo: check if there is a need to clear storage first or use driver that 
-    return new LocalStorage(dbName, options);
+    //return new LocalStorage(dbName, options);
   }
 
   if (Platform.OS === 'android' || Platform.OS === 'ios') {
