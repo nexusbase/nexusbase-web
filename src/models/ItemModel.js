@@ -56,7 +56,7 @@ export default class ItemModel extends BaseModel {
   }
 
   find(id) {
-    return item = this.db.get('items').find({ id }).value();
+    return this.db.get('items').find({ id }).value();
   }
 
   update(id, properties) {

@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
@@ -6,8 +7,13 @@ import { ApplicationProvider as KittenAppProvider, IconRegistry } from '@ui-kitt
 import { Provider as ReduxProvider } from 'react-redux';
 import RootStackNavigator from './navigators/RootStackNavigator';
 import store from '../services/reduxStore';
-import { DrawerContentScrollView } from '@react-navigation/drawer';
+import { Text, View } from 'react-native';
 
+export default () => (
+  <View><Text>App</Text></View>
+)
+
+/*
 export default () => {
   return (
     <>
@@ -22,3 +28,4 @@ export default () => {
     </>
   );
 }
+*/
