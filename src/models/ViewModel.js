@@ -45,6 +45,6 @@ export default class ViewModel extends BaseModel {
     const { id } = args;
     // todo: not found error
     this.find(id).assign({ ...args, updatedAt: Date.now() }).write();
-    return db.find({ id: args.id }).value();
+    return this.db.find({ id: args.id }).value();
   }
 }
